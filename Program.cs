@@ -1,6 +1,8 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using salutaris.Endpoints;
 
-app.MapGet("/", () => "Hello World!");
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddEndpointDefinitions(typeof(UserEndpoints));
+var app = builder.Build();
+app.UseEndpointDefinitions();
 
 app.Run();
