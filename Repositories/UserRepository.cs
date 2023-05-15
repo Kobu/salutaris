@@ -11,6 +11,7 @@ public class UserRepository
         using (var db = new DatabaseContext())
         {
             db.Users.Add(user);
+            db.SaveChanges();
         }
 
         return true;
