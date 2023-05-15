@@ -12,7 +12,7 @@ public class DatabaseContext : DbContext
         DbPath = Path.Join(path, "database.db");
     }
 
-    public DbSet<UserModel> Users { get; set; }
+    public DbSet<User> Users { get; set; }
 
     public string DbPath { get; set; }
 
