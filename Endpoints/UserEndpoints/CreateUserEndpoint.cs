@@ -1,12 +1,11 @@
-﻿
+﻿using FastEndpoints;
 using Microsoft.AspNetCore.Authorization;
-using FastEndpoints;
 using salutaris.Contracts.Requests;
 using salutaris.Contracts.Responses;
 using salutaris.Mapping;
 using salutaris.Services;
 
-namespace salutaris.Endpoints;
+namespace salutaris.Endpoints.UserEndpoints;
 
 [HttpPost("user"), AllowAnonymous]
 public class CreateUserEndpoint : Endpoint<CreateUserRequest, UserResponse>
