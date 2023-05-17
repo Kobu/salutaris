@@ -7,7 +7,8 @@ using salutaris.Services;
 
 namespace salutaris.Endpoints.UserEndpoints;
 
-[HttpPost("user"), AllowAnonymous]
+[HttpPost("user")]
+[AllowAnonymous]
 // TODO check EndpointWithMapper
 public class CreateUserEndpoint : Endpoint<CreateUserRequest, UserResponse>
 {

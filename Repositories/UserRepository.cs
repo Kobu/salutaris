@@ -31,6 +31,6 @@ public class UserRepository
     public async Task<List<User>> GetAllUsers()
     {
         await using var db = new DatabaseContext();
-        return  await db.Users.ToListAsync();
+        return await db.Users.ToListAsync();
     }
 }

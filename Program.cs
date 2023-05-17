@@ -1,6 +1,4 @@
 using FastEndpoints;
-using salutaris.Endpoints;
-using salutaris.Models;
 using salutaris.Services;
 
 var builder = WebApplication.CreateBuilder(args);

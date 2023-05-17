@@ -3,5 +3,4 @@
 public class CreateUserRequest
 {
     public string Name { get; init; } = default!;
-
 }

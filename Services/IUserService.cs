@@ -1,11 +1,10 @@
-﻿using System.Collections.Immutable;
-using salutaris.Models;
+﻿using salutaris.Models;
 
 namespace salutaris.Services;
 
 public interface IUserService
 {
-    public  Task<User> GetUserById(Guid id);
+    public Task<User> GetUserById(Guid id);
 
     public Task<User> GetUserByName(string name);
 

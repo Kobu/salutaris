@@ -1,6 +1,4 @@
-﻿using salutaris.Models;
-
-namespace salutaris.Contracts.Responses;
+﻿namespace salutaris.Contracts.Responses;
 
 public class GetAllUsersResponse
 {

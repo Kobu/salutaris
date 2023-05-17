@@ -1,6 +1,5 @@
 ﻿using salutaris.Contracts.Requests;
 using salutaris.Contracts.Responses;
-using salutaris.Endpoints;
 using salutaris.Models;
 
 namespace salutaris.Mapping;
@@ -31,7 +30,7 @@ public static class UserMapper
 
     public static GetAllUsersResponse ToUserResponse(this IEnumerable<User> users)
     {
-        return new GetAllUsersResponse()
+        return new GetAllUsersResponse
         {
             Users = users.Select(user => new UserResponse
             {

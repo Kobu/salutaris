@@ -5,7 +5,9 @@ using salutaris.Mapping;
 using salutaris.Services;
 
 namespace salutaris.Endpoints.UserEndpoints;
-[HttpGet("user"), AllowAnonymous]
+
+[HttpGet("user")]
+[AllowAnonymous]
 public class GetAllUsersEndpoint : EndpointWithoutRequest<GetAllUsersResponse>
 {
     private readonly IUserService _userService;
