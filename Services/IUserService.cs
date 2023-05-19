@@ -1,15 +1,16 @@
 ﻿using salutaris.Models;
+using salutaris.Utils;
 
 namespace salutaris.Services;
 
 public interface IUserService
 {
-    public Task<User> GetUserById(Guid id);
+    public Task<Result<User>> GetUserById(Guid id);
 
-    public Task<User> GetUserByName(string name);
+    public Task<Result<User>> GetUserByName(string name);
 
 
-    public Task<User> CreateNewUser(User user);
+    public Task<Result<User>> CreateNewUser(User user);
 
-    public Task<List<User>> GetAllUsers();
+    public Task<Result<IEnumerable<User>>> GetAllUsers();
 }

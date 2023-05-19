@@ -20,7 +20,13 @@ public class GetAllUsersEndpoint : EndpointWithoutRequest<GetAllUsersResponse>
     public override async Task HandleAsync(CancellationToken ct)
     {
         var result = await _userService.GetAllUsers();
-        var userResponse = result.ToUserResponse();
+        if (result.IsErr)
+        {
+            await SendErrorsAsync(cancellation: ct);
+            return;
+        }
+
+        var userResponse = result.Data.ToUserResponse();
         await SendOkAsync(userResponse, ct);
     }
 }

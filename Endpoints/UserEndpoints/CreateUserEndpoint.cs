@@ -10,7 +10,7 @@ namespace salutaris.Endpoints.UserEndpoints;
 [HttpPost("user")]
 [AllowAnonymous]
 // TODO check EndpointWithMapper
-public class CreateUserEndpoint : Endpoint<CreateUserRequest, UserResponse>
+public class CreateUserEndpoint : Endpoint<CreateUserRequest, WithError<UserResponse>>
 {
     private readonly IUserService _userService;
 
@@ -23,7 +23,21 @@ public class CreateUserEndpoint : Endpoint<CreateUserRequest, UserResponse>
     {
         var user = req.ToUser();
         var result = await _userService.CreateNewUser(user);
-        var userResponse = result.ToUserResponse();
-        await SendOkAsync(userResponse, ct);
+        if (result.IsErr)
+        {
+            await SendAsync(new WithError<UserResponse>
+            {
+                Success = false,
+                ErrorMessage = "Something went wrong"
+            }, 404, ct);
+            return;
+        }
+
+        var userResponse = result.Data.ToUserResponse();
+        await SendOkAsync(new WithError<UserResponse>
+        {
+            Success = true,
+            Data = userResponse
+        }, ct);
     }
 }

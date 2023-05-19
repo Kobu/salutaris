@@ -21,7 +21,13 @@ public class GetUserEndpoint : Endpoint<GetUserRequest, UserResponse>
     public override async Task HandleAsync(GetUserRequest req, CancellationToken ct)
     {
         var result = await _userService.GetUserById(req.id);
-        var userResponse = result.ToUserResponse();
+        if (result.IsErr)
+        {
+            await SendNotFoundAsync(ct);
+            return;
+        }
+
+        var userResponse = result.Data.ToUserResponse();
         await SendOkAsync(userResponse, ct);
     }
 }
