@@ -28,7 +28,7 @@ public class CreateUserEndpoint : Endpoint<CreateUserRequest, WithError<UserResp
             await SendAsync(new WithError<UserResponse>
             {
                 Success = false,
-                ErrorMessage = "Something went wrong"
+                ErrorMessage = result.Error.Message
             }, 404, ct);
             return;
         }

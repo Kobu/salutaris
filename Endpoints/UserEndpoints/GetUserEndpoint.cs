@@ -9,7 +9,7 @@ namespace salutaris.Endpoints.UserEndpoints;
 
 [HttpGet("user/{id:guid}")]
 [AllowAnonymous]
-public class GetUserEndpoint : Endpoint<GetUserRequest, UserResponse>
+public class GetUserEndpoint : Endpoint<GetUserRequest, WithError<UserResponse>>
 {
     private readonly IUserService _userService;
 
@@ -23,11 +23,20 @@ public class GetUserEndpoint : Endpoint<GetUserRequest, UserResponse>
         var result = await _userService.GetUserById(req.id);
         if (result.IsErr)
         {
-            await SendNotFoundAsync(ct);
+            await SendAsync(new WithError<UserResponse>
+            {
+                Success = false,
+                ErrorMessage = result.Error.Message
+            }, 404, ct);
             return;
         }
+   
 
         var userResponse = result.Data.ToUserResponse();
-        await SendOkAsync(userResponse, ct);
+        await SendOkAsync(new WithError<UserResponse>
+        {
+            Success = true,
+            Data = userResponse,
+        }, ct);
     }
 }
