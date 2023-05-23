@@ -12,7 +12,6 @@ public class GroupRepository
         await using var db = new DatabaseContext();
         await db.Groups.AddAsync(group);
         db.Users.Attach(group.Creator);
-        // db.Groups.Attach(group);
         await db.SaveChangesAsync();
 
         return Result<Group>.Ok(group);
@@ -38,12 +37,8 @@ public class GroupRepository
         await using var db = new DatabaseContext();
         try
         {
-            var userInGroup = group.Users.FirstOrDefault(groupUser => groupUser.Id == user.Id);
-            if (userInGroup is not null)
-            {
-                return Result<User>.Err(new Exception("User is already in the group"));
-            }
-
+            // todo user joining does not work
+            db.Groups.Attach(group);
             group.Users.Add(user);
             await db.SaveChangesAsync();
             return Result<User>.Ok(user);
@@ -62,12 +57,10 @@ public class GroupRepository
         {
             var group = await db.Groups
                 .Include(x => x.Creator)
+                .Include(x => x.Users)
                 .FirstOrDefaultAsync(group => group.Id == groupId);
-            if (group is null)
-            {
-                return Result<Group>.Err("Group was not found");
-            }
-            
+            if (group is null) return Result<Group>.Err("Group was not found");
+
             return Result<Group>.Ok(group);
         }
         catch (Exception e)
@@ -91,5 +84,4 @@ public class GroupRepository
             return Result<List<Group>>.Err(e);
         }
     }
-    
 }
