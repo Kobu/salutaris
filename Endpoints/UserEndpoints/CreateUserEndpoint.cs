@@ -9,8 +9,7 @@ namespace salutaris.Endpoints.UserEndpoints;
 
 [HttpPost("user")]
 [AllowAnonymous]
-// TODO check EndpointWithMapper
-public class CreateUserEndpoint : Endpoint<CreateUserRequest, WithError<UserResponse>>
+public class CreateUserEndpoint : ResultEndpoint<CreateUserRequest, UserResponse>
 {
     private readonly IUserService _userService;
 
@@ -19,25 +18,16 @@ public class CreateUserEndpoint : Endpoint<CreateUserRequest, WithError<UserResp
         _userService = userService;
     }
 
-    public override async Task HandleAsync(CreateUserRequest req, CancellationToken ct)
+    protected override async Task<bool> HandleResult(CreateUserRequest req)
     {
         var user = req.ToUser();
         var result = await _userService.CreateNewUser(user);
         if (result.IsErr)
         {
-            await SendAsync(new WithError<UserResponse>
-            {
-                Success = false,
-                ErrorMessage = result.Error.Message
-            }, 404, ct);
-            return;
+            return await HandleErr(result);
         }
 
         var userResponse = result.Data.ToUserResponse();
-        await SendOkAsync(new WithError<UserResponse>
-        {
-            Success = true,
-            Data = userResponse
-        }, ct);
+        return await HandleOk(userResponse);
     }
 }

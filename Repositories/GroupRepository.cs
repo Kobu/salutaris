@@ -37,7 +37,7 @@ public class GroupRepository
         await using var db = new DatabaseContext();
         try
         {
-            // todo user joining does not work
+            // TODO group creator cannot join his own group :(
             db.Groups.Attach(group);
             group.Users.Add(user);
             await db.SaveChangesAsync();

@@ -8,7 +8,7 @@ namespace salutaris.Endpoints.UserEndpoints;
 
 [HttpGet("user")]
 [AllowAnonymous]
-public class GetAllUsersEndpoint : EndpointWithoutRequest<WithError<GetAllUsersResponse>>
+public class GetAllUsersEndpoint : ResultEndpointWithoutRequest<GetAllUsersResponse>
 {
     private readonly IUserService _userService;
 
@@ -17,24 +17,16 @@ public class GetAllUsersEndpoint : EndpointWithoutRequest<WithError<GetAllUsersR
         _userService = userService;
     }
 
-    public override async Task HandleAsync(CancellationToken ct)
+    protected override async Task<bool> HandleResult()
     {
         var result = await _userService.GetAllUsers();
         if (result.IsErr)
         {
-            await SendAsync(new WithError<GetAllUsersResponse>
-            {
-                Success = false,
-                ErrorMessage = result.Error.Message
-            }, 404, ct);
-            return;
+            return await HandleErr(result);
         }
 
         var userResponse = result.Data.ToUserResponse();
-        await SendOkAsync(new WithError<GetAllUsersResponse>
-        {
-            Success = true,
-            Data = userResponse
-        }, ct);
+        return await HandleOk(userResponse);
     }
+
 }
