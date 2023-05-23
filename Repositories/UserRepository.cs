@@ -21,7 +21,11 @@ public class UserRepository
         await using var db = new DatabaseContext();
         try
         {
-            var user = await db.Users.FirstAsync(x => x.Id == id);
+            var user = await db.Users.FirstOrDefaultAsync(x => x.Id == id);
+            if (user is null)
+            {
+                return Result<User>.Err(new Exception($"User of id '{id}' was not found"));
+            }
             return Result<User>.Ok(user);
         }
         catch (Exception e)

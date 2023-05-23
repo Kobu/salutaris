@@ -30,13 +30,13 @@ public class GetUserEndpoint : Endpoint<GetUserRequest, WithError<UserResponse>>
             }, 404, ct);
             return;
         }
-   
+
 
         var userResponse = result.Data.ToUserResponse();
         await SendOkAsync(new WithError<UserResponse>
         {
             Success = true,
-            Data = userResponse,
+            Data = userResponse
         }, ct);
     }
 }

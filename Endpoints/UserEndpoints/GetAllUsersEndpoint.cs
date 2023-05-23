@@ -34,7 +34,7 @@ public class GetAllUsersEndpoint : EndpointWithoutRequest<WithError<GetAllUsersR
         await SendOkAsync(new WithError<GetAllUsersResponse>
         {
             Success = true,
-            Data = userResponse,
+            Data = userResponse
         }, ct);
     }
 }
