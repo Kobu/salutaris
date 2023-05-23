@@ -12,6 +12,16 @@ public class DatabaseContext : DbContext
         DbPath = Path.Join(path, "database.db");
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<User>()
+            .HasMany(e => e.Groups)
+            .WithMany(e => e.Users);
+
+        modelBuilder.Entity<Group>()
+            .HasOne(e => e.Creator);
+    }
+
     public DbSet<User> Users { get; set; }
 
     public string DbPath { get; set; }
