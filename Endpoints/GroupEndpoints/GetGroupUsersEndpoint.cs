@@ -9,7 +9,7 @@ namespace salutaris.Endpoints.GroupEndpoints;
 
 [HttpGet("group/{id:guid}/users")]
 [AllowAnonymous]
-public class GetGroupUsersEndpoint : ResultEndpoint<GetGroupByIdRequest,List<UserResponse>>
+public class GetGroupUsersEndpoint : ResultEndpoint<GetGroupByIdRequest, List<UserResponse>>
 {
     private readonly IGroupService _groupService;
 
@@ -27,8 +27,8 @@ public class GetGroupUsersEndpoint : ResultEndpoint<GetGroupByIdRequest,List<Use
             return await HandleErr(result);
         }
 
-        var response = result.Data.Users
-            .Select(user => user.ToUserResponse())
+        var response = result.Data.UserGroups
+            .Select(userGroup => userGroup.User.ToUserResponse())
             .ToList();
 
         return await HandleOk(response);

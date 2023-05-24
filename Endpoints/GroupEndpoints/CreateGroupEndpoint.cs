@@ -23,6 +23,7 @@ public class CreateGroupEndpoint : ResultEndpoint<CreateGroupRequest,GroupRespon
 
     protected override async Task<bool> HandleResult(CreateGroupRequest req)
     {
+        // TODO this should be moved to the service layer
         var userExists = await _userService.GetUserById(req.CreatorId);
         if (userExists.IsErr)
         {

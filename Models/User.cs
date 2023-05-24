@@ -4,5 +4,7 @@ public class User : BaseModel
 {
     public string Name { get; init; } = default!;
 
-    public List<Group> Groups { get; set; } = new();
+    public ICollection<UserGroup> UserGroups { get; set; }
+
+    public List<Expense> Expenses { get; set; } = new();
 }

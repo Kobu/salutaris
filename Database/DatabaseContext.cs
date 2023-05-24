@@ -17,22 +17,41 @@ public class DatabaseContext : DbContext
     public DbSet<Group> Groups { get; set; }
 
     public DbSet<Expense> Expenses { get; set; }
+    public DbSet<UserGroup> UserGroups { get; set; }
 
     public string DbPath { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<User>()
-            .HasMany(e => e.Groups)
-            .WithMany(e => e.Users);
+        modelBuilder.Entity<UserGroup>()
+            .HasKey(ug => new { ug.UserId, ug.GroupId });
+
+        modelBuilder.Entity<UserGroup>()
+            .HasOne(ug => ug.User)
+            .WithMany(u => u.UserGroups)
+            .HasForeignKey(ug => ug.UserId);
+
+        modelBuilder.Entity<UserGroup>()
+            .HasOne(ug => ug.Group)
+            .WithMany(g => g.UserGroups)
+            .HasForeignKey(ug => ug.GroupId);
+
+        modelBuilder.Entity<Expense>()
+            .HasOne(e => e.User)
+            .WithMany(u => u.Expenses)
+            .HasForeignKey(e => e.UserId);
+
+        modelBuilder.Entity<Expense>()
+            .HasOne(e => e.Group)
+            .WithMany(g => g.Expenses)
+            .HasForeignKey(e => e.GroupId);
 
         modelBuilder.Entity<Group>()
-            .HasOne(e => e.Creator);
-
-        modelBuilder.Entity<Group>()
-            .HasMany(e => e.Users);
-        base.OnModelCreating(modelBuilder);
+            .HasOne(g => g.Creator)
+            .WithMany()
+            .HasForeignKey(g => g.CreatorId);
     }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {

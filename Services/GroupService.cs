@@ -1,4 +1,5 @@
-﻿using salutaris.Models;
+﻿using System.Collections.Immutable;
+using salutaris.Models;
 using salutaris.Repositories;
 using salutaris.Utils;
 
@@ -28,11 +29,10 @@ public class GroupService : IGroupService
 
     public async Task<Result<User>> JoinGroup(Group group, User user)
     {
-        if (group.Users.FirstOrDefault(x => x.Id == user.Id) is not null)
+        if (group.UserGroups.FirstOrDefault(x => x.User.Id == user.Id) is not null)
             return Result<User>.Err("User is already in the group");
 
-        var result = await _groupRepository.JoinGroup(group, user);
-        return result;
+        return await _groupRepository.JoinGroup(group, user);
     }
 
     public async Task<Result<Group>> GetGroupById(Guid groupId)

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using salutaris.Database;
 
@@ -10,12 +11,29 @@ using salutaris.Database;
 namespace salutaris.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230511170510_FixMissingOverloads3")]
+    partial class FixMissingOverloads3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0-preview.3.23174.2");
+
+            modelBuilder.Entity("GroupUser", b =>
+                {
+                    b.Property<Guid>("GroupsId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UsersId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("GroupsId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("GroupUser");
+                });
 
             modelBuilder.Entity("salutaris.Models.Expense", b =>
                 {
@@ -64,7 +82,7 @@ namespace salutaris.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("CreatorId")
+                    b.Property<Guid?>("CreatorId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("GroupName")
@@ -102,19 +120,19 @@ namespace salutaris.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("salutaris.Models.UserGroup", b =>
+            modelBuilder.Entity("GroupUser", b =>
                 {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("TEXT");
+                    b.HasOne("salutaris.Models.Group", null)
+                        .WithMany()
+                        .HasForeignKey("GroupsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<Guid>("GroupId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("UserId", "GroupId");
-
-                    b.HasIndex("GroupId");
-
-                    b.ToTable("UserGroups", (string)null);
+                    b.HasOne("salutaris.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("salutaris.Models.Expense", b =>
@@ -139,45 +157,22 @@ namespace salutaris.Migrations
             modelBuilder.Entity("salutaris.Models.Group", b =>
                 {
                     b.HasOne("salutaris.Models.User", "Creator")
-                        .WithMany()
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("OwningGroups")
+                        .HasForeignKey("CreatorId");
 
                     b.Navigation("Creator");
-                });
-
-            modelBuilder.Entity("salutaris.Models.UserGroup", b =>
-                {
-                    b.HasOne("salutaris.Models.Group", "Group")
-                        .WithMany("UserGroups")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("salutaris.Models.User", "User")
-                        .WithMany("UserGroups")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Group");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("salutaris.Models.Group", b =>
                 {
                     b.Navigation("Expenses");
-
-                    b.Navigation("UserGroups");
                 });
 
             modelBuilder.Entity("salutaris.Models.User", b =>
                 {
                     b.Navigation("Expenses");
 
-                    b.Navigation("UserGroups");
+                    b.Navigation("OwningGroups");
                 });
 #pragma warning restore 612, 618
         }

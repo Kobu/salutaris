@@ -39,7 +39,14 @@ public class GroupRepository
         {
             // TODO group creator cannot join his own group :(
             db.Groups.Attach(group);
-            group.Users.Add(user);
+            group.UserGroups.Add(new()
+            {
+                UserId = user.Id,
+                User = user,
+                GroupId = group.Id,
+                Group = group
+            });
+            // db.Users.Attach(user);
             await db.SaveChangesAsync();
             return Result<User>.Ok(user);
         }
@@ -57,9 +64,16 @@ public class GroupRepository
         {
             var group = await db.Groups
                 .Include(x => x.Creator)
-                .Include(x => x.Users)
                 .FirstOrDefaultAsync(group => group.Id == groupId);
             if (group is null) return Result<Group>.Err("Group was not found");
+
+            var userGroups = db.UserGroups
+                .Where(x => x.GroupId == groupId)
+                .Include(x => x.User)
+                .Include(x => x.Group)
+                .ToList();
+
+            group.UserGroups = userGroups;
 
             return Result<Group>.Ok(group);
         }
