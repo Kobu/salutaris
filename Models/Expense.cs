@@ -2,15 +2,11 @@
 
 public class Expense : BaseModel
 {
-    // public Group Group { get; set; } = default!;
-    public string Item { get; set; } = default!;
-
-    public decimal Price { get; set; } = default!;
-
-    // public User User { get; set; } = default!;
-    public string Currency { get; set; } = default!;
-    public Guid UserId { get; set; }
-    public User User { get; set; }
-    public Guid GroupId { get; set; }
-    public Group Group { get; set; }
+    public required string Item { get; init; } = default!;
+    public required decimal Price { get; init; }
+    public required string Currency { get; init; } = default!;
+    public required Guid UserId { get; init; }
+    public required User User { get; init; } = default!;
+    public required Guid GroupId { get; init; }
+    public required Group Group { get; init; } = default!;
 }
