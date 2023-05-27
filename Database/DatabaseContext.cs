@@ -23,6 +23,7 @@ public class DatabaseContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        
         modelBuilder.Entity<UserGroup>()
             .HasKey(ug => new { ug.UserId, ug.GroupId });
 
@@ -55,6 +56,7 @@ public class DatabaseContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
+        options.EnableSensitiveDataLogging();
         options.UseSqlite($"Data Source={DbPath}");
     }
 }

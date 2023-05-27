@@ -29,7 +29,16 @@ public class GroupService : IGroupService
 
     public async Task<Result<User>> JoinGroup(Group group, User user)
     {
-        if (group.UserGroups.FirstOrDefault(x => x.User.Id == user.Id) is not null)
+        var groupUsers = await _groupRepository.GetGroupUsers(group.Id);
+        if (groupUsers.IsErr)
+        {
+            return Result<User>.Err(groupUsers.Error);
+        }
+
+        var userInGroup = groupUsers.Data
+            .FirstOrDefault(groupUser => groupUser.Id == user.Id);
+        
+        if (userInGroup is not null)
             return Result<User>.Err("User is already in the group");
 
         return await _groupRepository.JoinGroup(group, user);
@@ -43,5 +52,28 @@ public class GroupService : IGroupService
     public async Task<Result<List<Group>>> GetAllGroups()
     {
         return await _groupRepository.GetAllGroups();
+    }
+
+    public async Task<Result<List<User>>> GetGroupUsers(Guid groupId)
+    {
+        return await _groupRepository.GetGroupUsers(groupId);
+    }
+
+    public async Task<Result<Group>> GetGroupFullInfo(Guid groupId)
+    {
+        var group = await GetGroupById(groupId);
+        if (group.IsErr)
+        {
+            return group;
+        }
+
+        var groupCreator = await _groupRepository.GetGroupCreator(groupId);
+        if (groupCreator.IsErr)
+        {
+            return Result<Group>.Err(groupCreator.Error);
+        }
+
+        group.Data.Creator = groupCreator.Data;
+        return group;
     }
 }

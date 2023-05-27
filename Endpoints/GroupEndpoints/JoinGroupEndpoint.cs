@@ -28,6 +28,7 @@ public class JoinGroupEndpoint : ResultEndpoint<JoinGroupRequest,EmptyResponse>
             return await HandleErr(user);
         }
 
+        // TODO move this to the service layer
         var group = await _groupService.GetGroupById(req.GroupId);
         if (group.IsErr)
         {

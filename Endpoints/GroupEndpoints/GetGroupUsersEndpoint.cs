@@ -21,14 +21,14 @@ public class GetGroupUsersEndpoint : ResultEndpoint<GetGroupByIdRequest, List<Us
 
     protected override async Task<bool> HandleResult(GetGroupByIdRequest req)
     {
-        var result = await _groupService.GetGroupById(req.Id);
+        var result = await _groupService.GetGroupUsers(req.Id);
         if (result.IsErr)
         {
             return await HandleErr(result);
         }
 
-        var response = result.Data.UserGroups
-            .Select(userGroup => userGroup.User.ToUserResponse())
+        var response = result.Data
+            .Select(user => user.ToUserResponse())
             .ToList();
 
         return await HandleOk(response);

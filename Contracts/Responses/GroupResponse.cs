@@ -1,6 +1,4 @@
-﻿using salutaris.Models;
-
-namespace salutaris.Contracts.Responses;
+﻿namespace salutaris.Contracts.Responses;
 
 public class GroupResponse
 {
@@ -11,5 +9,5 @@ public class GroupResponse
 
     public DateTime UpdatedAt { get; init; } = default!;
 
-    public UserResponse Creator { get; init; } = default!;
+    public Guid CreatorId { get; init; } = default!;
 }

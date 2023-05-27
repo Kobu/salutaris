@@ -37,16 +37,16 @@ public class GroupRepository
         await using var db = new DatabaseContext();
         try
         {
-            // TODO group creator cannot join his own group :(
             db.Groups.Attach(group);
-            group.UserGroups.Add(new()
+            var userGroup = new UserGroup()
             {
                 UserId = user.Id,
                 User = user,
                 GroupId = group.Id,
                 Group = group
-            });
-            // db.Users.Attach(user);
+            };
+            
+            group.UserGroups.Add(userGroup);
             await db.SaveChangesAsync();
             return Result<User>.Ok(user);
         }
@@ -56,8 +56,33 @@ public class GroupRepository
         }
     }
 
+    public async Task<Result<List<User>>> GetGroupUsers(Guid groupId)
+    {
+        await using var db = new DatabaseContext();
+        try
+        {
+            var group = await db.Groups
+                .FirstOrDefaultAsync(group => group.Id == groupId);
+            if (group is null)
+            {
+                return Result<List<User>>.Err("Group was not found");
+            }
 
-    public async Task<Result<Group>> GetGroupById(Guid groupId)
+            var userGroups = db.UserGroups
+                .Where(x => x.GroupId == groupId)
+                .Include(x => x.User)
+                .Select(x => x.User)
+                .ToList();
+            
+            return Result<List<User>>.Ok(userGroups);
+        }
+        catch (Exception e)
+        {
+            return Result<List<User>>.Err(e);
+        }
+    }
+
+    public async Task<Result<User>> GetGroupCreator(Guid groupId)
     {
         await using var db = new DatabaseContext();
         try
@@ -65,15 +90,29 @@ public class GroupRepository
             var group = await db.Groups
                 .Include(x => x.Creator)
                 .FirstOrDefaultAsync(group => group.Id == groupId);
-            if (group is null) return Result<Group>.Err("Group was not found");
+            if (group is null)
+            {
+                return Result<User>.Err("Group was not found");
+            }
+            return Result<User>.Ok(group.Creator);
+        }
+        catch (Exception e)
+        {
+            return Result<User>.Err(e);
+        }
+    }
 
-            var userGroups = db.UserGroups
-                .Where(x => x.GroupId == groupId)
-                .Include(x => x.User)
-                .Include(x => x.Group)
-                .ToList();
-
-            group.UserGroups = userGroups;
+    public async Task<Result<Group>> GetGroupById(Guid groupId)
+    {
+        await using var db = new DatabaseContext();
+        try
+        {
+            var group = await db.Groups
+                .FirstOrDefaultAsync(group => group.Id == groupId);
+            if (group is null)
+            {
+                return Result<Group>.Err("Group was not found");
+            }
 
             return Result<Group>.Ok(group);
         }
@@ -89,7 +128,6 @@ public class GroupRepository
         try
         {
             var groups = await db.Groups
-                .Include(group => group.Creator)
                 .ToListAsync();
             return Result<List<Group>>.Ok(groups);
         }
