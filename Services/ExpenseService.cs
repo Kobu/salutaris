@@ -14,4 +14,8 @@ public class ExpenseService : IExpenseService
         return await _expenseRepository.CreateExpense(expense);
     }
 
+    public async Task<Result<Expense>> GetExpenseById(Guid id)
+    {
+        return await _expenseRepository.GetExpenseById(id);
+    }
 }

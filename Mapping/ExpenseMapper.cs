@@ -27,7 +27,7 @@ public static class ExpenseMapper
             Id = expense.Id,
             CreatedAt = expense.CreatedAt,
             UpdatedAt = expense.UpdatedAt,
-            GroupId = expense.Group.Id,
+            GroupId = expense.GroupId,
             Item = expense.Item,
             Price = expense.Price,
             Currency = expense.Currency,
