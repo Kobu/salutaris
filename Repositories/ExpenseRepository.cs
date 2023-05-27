@@ -42,4 +42,23 @@ public class ExpenseRepository
 
         return Result<Expense>.Ok(result);
     }
+
+    public async Task<Result<List<Expense>>> GetExpensesByGroup(Guid groupId)
+    {
+        try
+        {
+            await using var db = new DatabaseContext();
+            var result = db.Expenses
+                .Include(x => x.Group)
+                .Include(x => x.User)
+                .Where(expense => expense.GroupId == groupId)
+                .ToList();
+
+            return Result<List<Expense>>.Ok(result);
+        }
+        catch (Exception e)
+        {
+            return Result<List<Expense>>.Err(e);
+        }
+    }
 }

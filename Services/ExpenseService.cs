@@ -6,7 +6,6 @@ namespace salutaris.Services;
 
 public class ExpenseService : IExpenseService
 {
-
     private readonly ExpenseRepository _expenseRepository = new();
 
     public async Task<Result<Expense>> CreateExpense(Expense expense)
@@ -17,5 +16,10 @@ public class ExpenseService : IExpenseService
     public async Task<Result<Expense>> GetExpenseById(Guid id)
     {
         return await _expenseRepository.GetExpenseById(id);
+    }
+
+    public async Task<Result<List<Expense>>> GetExpensesByGroup(Guid groupId)
+    {
+        return await _expenseRepository.GetExpensesByGroup(groupId);
     }
 }
