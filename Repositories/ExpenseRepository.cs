@@ -8,23 +8,28 @@ namespace salutaris.Repositories;
 
 public class ExpenseRepository
 {
- 
-
     public async Task<Result<Expense>> CreateExpense(Expense expense)
     {
-        await using var db = new DatabaseContext();
+        try
+        {
+            await using var db = new DatabaseContext();
 
-        db.Attach(expense.Group);
-        db.Attach(expense.User);
-        await db.Expenses.AddAsync(expense);
-        await db.SaveChangesAsync();
+            db.Attach(expense.Group);
+            db.Attach(expense.User);
+            await db.Expenses.AddAsync(expense);
+            await db.SaveChangesAsync();
 
-        var result = await db.Expenses
-            .Include(x=>x.Group)
-            .Include(x=> x.User)
-            .FirstAsync(x => x.Id == expense.Id);
+            var result = await db.Expenses
+                .Include(x=>x.Group)
+                .Include(x=> x.User)
+                .FirstAsync(x => x.Id == expense.Id);
         
-        return Result<Expense>.Ok(result);
+            return Result<Expense>.Ok(result);
+        }
+        catch (Exception e)
+        {
+            return Result<Expense>.Err(e);
+        }
     }
 
     public async Task<Result<Expense>> GetExpenseById(Guid id)
