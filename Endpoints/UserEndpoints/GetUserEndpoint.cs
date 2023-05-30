@@ -20,7 +20,7 @@ public class GetUserEndpoint : ResultEndpoint<GetUserRequest, UserResponse>
 
     protected override async Task<bool> HandleResult(GetUserRequest req)
     {
-        var result = await _userService.GetUserById(req.id);
+        var result = await _userService.GetUserById(req.Id);
         if (result.IsErr)
         {
             return await HandleErr(result);

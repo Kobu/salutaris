@@ -2,5 +2,5 @@
 
 public class GetUserRequest
 {
-    public Guid id { get; init; } = default;
+    public Guid Id { get; init; } = default;
 }
