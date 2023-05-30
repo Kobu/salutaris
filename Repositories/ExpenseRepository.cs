@@ -66,4 +66,23 @@ public class ExpenseRepository
             return Result<List<Expense>>.Err(e);
         }
     }
+
+    public async Task<Result<List<Expense>>> GetExpensesByUser(Guid userId)
+    {
+        try
+        {
+            await using var db = new DatabaseContext();
+            var result = db.Expenses
+                .Include(x => x.Group)
+                .Include(x => x.User)
+                .Where(expense => expense.UserId == userId)
+                .ToList();
+
+            return Result<List<Expense>>.Ok(result);
+        }
+        catch (Exception e)
+        {
+            return Result<List<Expense>>.Err(e);
+        }
+    }
 }

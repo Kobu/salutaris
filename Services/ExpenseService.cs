@@ -22,4 +22,9 @@ public class ExpenseService : IExpenseService
     {
         return await _expenseRepository.GetExpensesByGroup(groupId);
     }
+    
+    public async Task<Result<List<Expense>>> GetExpensesByUser(Guid userId)
+    {
+        return await _expenseRepository.GetExpensesByUser(userId);
+    }
 }
