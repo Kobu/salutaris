@@ -35,6 +35,7 @@ public class CreateExpenseEndpoint : ResultEndpoint<CreateExpenseRequest, Expens
         {
             return await HandleErr(user);
         }
+        // TODO check if user belongs to the group
 
         var expense = req.ToExpense(group.Data, user.Data);
         
