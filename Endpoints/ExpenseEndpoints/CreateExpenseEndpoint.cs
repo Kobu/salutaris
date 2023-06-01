@@ -4,6 +4,7 @@ using salutaris.Contracts.Requests;
 using salutaris.Contracts.Responses;
 using salutaris.Mapping;
 using salutaris.Services;
+using salutaris.Utils;
 
 namespace salutaris.Endpoints.ExpenseEndpoints;
 
@@ -35,7 +36,12 @@ public class CreateExpenseEndpoint : ResultEndpoint<CreateExpenseRequest, Expens
         {
             return await HandleErr(user);
         }
-        // TODO check if user belongs to the group
+
+        var userInGroup = await _groupService.UserBelongsToGroup(req.GroupId, req.UserId);
+        if (userInGroup.IsErr || !userInGroup.Data)
+        {
+            return await HandleErr(Result<object>.Err("User does not belong to this group"));
+        }
 
         var expense = req.ToExpense(group.Data, user.Data);
         

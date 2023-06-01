@@ -76,4 +76,23 @@ public class GroupService : IGroupService
         group.Data.Creator = groupCreator.Data;
         return group;
     }
+
+    public async Task<Result<bool>> UserBelongsToGroup(Guid groupId, Guid userId)
+    {
+        var groupUsers = await GetGroupUsers(groupId);
+        if (groupUsers.IsErr)
+        {
+            return Result<bool>.Err(groupUsers.Error);
+        }
+
+        var user = groupUsers.Data
+            .FirstOrDefault(user => user.Id == userId);
+
+        if (user is null)
+        {
+            return Result<bool>.Err("User does not belong to this group");
+        }
+
+        return Result<bool>.Ok(true);
+    }
 }

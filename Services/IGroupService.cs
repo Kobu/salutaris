@@ -13,4 +13,5 @@ public interface IGroupService
     public Task<Result<List<Group>>> GetAllGroups();
     public  Task<Result<List<User>>> GetGroupUsers(Guid groupId);
     public  Task<Result<Group>> GetGroupFullInfo(Guid groupId);
+    public Task<Result<bool>> UserBelongsToGroup(Guid groupId, Guid userId);
 }
