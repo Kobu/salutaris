@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "salutaris", "salutaris.csproj", "{C60374D7-6B21-47C3-8989-1F374A9D9D3E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salutaris.Api", "Salutaris.Api/salutaris.csproj", "{C60374D7-6B21-47C3-8989-1F374A9D9D3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -16,4 +16,15 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0-preview.3.23174.2" />
     </ItemGroup>
 
+
+
+    <ItemGroup>
+        <None Remove="Properties\launchSettings.json" />
+        <None Include="Salutaris.Api\Properties\launchSettings.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="Salutaris.Api\salutaris.csproj" />
+    </ItemGroup>
+
 </Project>
