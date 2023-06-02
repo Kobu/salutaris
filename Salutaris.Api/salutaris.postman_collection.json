@@ -92,7 +92,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5112/group/f6c38b99-b7e1-4464-bc91-167bf7a004db",
+							"raw": "http://localhost:5112/group/f6c38b99-b7e1-4464-ac91-167bf7a004db",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -100,7 +100,7 @@
 							"port": "5112",
 							"path": [
 								"group",
-								"f6c38b99-b7e1-4464-bc91-167bf7a004db"
+								"f6c38b99-b7e1-4464-ac91-167bf7a004db"
 							]
 						}
 					},
@@ -108,9 +108,21 @@
 				},
 				{
 					"name": "Get All Groups",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:5112/group/",
 							"protocol": "http",
@@ -132,7 +144,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5112/group/f6c38b99-b7e1-4464-bc91-167bf7a004db/users",
+							"raw": "http://localhost:5112/group/a928a083-3806-4753-8eba-87b222b5cc0d/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -140,7 +152,7 @@
 							"port": "5112",
 							"path": [
 								"group",
-								"f6c38b99-b7e1-4464-bc91-167bf7a004db",
+								"a928a083-3806-4753-8eba-87b222b5cc0d",
 								"users"
 							]
 						}
@@ -154,7 +166,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": \"e216031c-3fe4-4e73-b2dd-d13737d06b36\"\r\n}",
+							"raw": "{\r\n    \"userId\": \"dfee43ed-d9df-482f-867b-cf8996316193\" \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -162,7 +174,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5112/group/f6c38b99-b7e1-4464-bc91-167bf7a004db/join",
+							"raw": "http://localhost:5112/group/a928a083-3806-4753-8eba-87b222b5cc0d/join",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -170,7 +182,7 @@
 							"port": "5112",
 							"path": [
 								"group",
-								"f6c38b99-b7e1-4464-bc91-167bf7a004db",
+								"a928a083-3806-4753-8eba-87b222b5cc0d",
 								"join"
 							]
 						}
@@ -209,7 +221,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"{{$guid}}\",\r\n    \"name\": \"Kobu2\"\r\n}",
+							"raw": "{\r\n    \"id\": \"{{$guid}}\",\r\n    \"name\": \"Hello\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -279,7 +291,27 @@
 					"name": "Create Expense",
 					"request": {
 						"method": "POST",
-						"header": []
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"groupId\" :  \"a928a083-3806-4753-8eba-87b222b5cc0d\",\r\n    \"userId\" : \"a4e06030-743b-439e-b179-c41e8c897864\",\r\n    \"item\" : \"NOTVISIBLE\",\r\n    \"price\" : \"300\",\r\n    \"currency\" : \"EUR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5112/expense",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"expense"
+							]
+						}
 					},
 					"response": []
 				},
@@ -287,7 +319,19 @@
 					"name": "Get Expense by Id",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/expense/c1bd38ba-8bb4-48ba-b652-a2c60c4e022e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"expense",
+								"c1bd38ba-8bb4-48ba-b652-a2c60c4e022e"
+							]
+						}
 					},
 					"response": []
 				},
@@ -295,7 +339,20 @@
 					"name": "Get Expense by Group",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/expense/group/a928a083-3806-4753-8eba-87b222b5cc0d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"expense",
+								"group",
+								"a928a083-3806-4753-8eba-87b222b5cc0d"
+							]
+						}
 					},
 					"response": []
 				},
@@ -305,7 +362,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5112/expense/group/f6c38b99-b7e1-4464-bc91-167bf7a004db",
+							"raw": "http://localhost:5112/expense/user/da2ec24b-636f-4176-9db6-b6d1c2973850",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -313,8 +370,8 @@
 							"port": "5112",
 							"path": [
 								"expense",
-								"group",
-								"f6c38b99-b7e1-4464-bc91-167bf7a004db"
+								"user",
+								"da2ec24b-636f-4176-9db6-b6d1c2973850"
 							]
 						}
 					},
@@ -324,7 +381,21 @@
 					"name": "Get Expenses by Group by User",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/expense/group/a928a083-3806-4753-8eba-87b222b5cc0d/dfee43ed-d9df-482f-867b-cf8996316193",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"expense",
+								"group",
+								"a928a083-3806-4753-8eba-87b222b5cc0d",
+								"dfee43ed-d9df-482f-867b-cf8996316193"
+							]
+						}
 					},
 					"response": []
 				}
