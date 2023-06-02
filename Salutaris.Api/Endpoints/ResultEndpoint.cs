@@ -23,13 +23,24 @@ public abstract class ResultEndpoint<TRequest,TResponse>: Endpoint<TRequest,With
         return true;
     }
 
-    protected async Task<bool> HandleErr<T>(Result<T> res)
+    protected async Task<bool> HandleErr<T>(Result<T> res, int statusCode = 404)
     {
         await SendAsync(new()
         {
             Success = false,
             ErrorMessage = res.Error.Message
-        }, 404);
+        }, statusCode);
+
+        return false;
+    }
+    
+    protected async Task<bool> HandleErr(string message, int statusCode = 404)
+    {
+        await SendAsync(new()
+        {
+            Success = false,
+            ErrorMessage =message
+        }, statusCode);
 
         return false;
     }
