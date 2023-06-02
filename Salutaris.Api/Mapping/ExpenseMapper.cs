@@ -34,5 +34,22 @@ public static class ExpenseMapper
             UserId = expense.UserId
         };
     }
+    
+    public static ExpenseResponseFull ToResponseFull(this Expense expense)
+    {
+        return new()
+        {
+            Id = expense.Id,
+            CreatedAt = expense.CreatedAt,
+            UpdatedAt = expense.UpdatedAt,
+            GroupId = expense.GroupId,
+            Item = expense.Item,
+            Price = expense.Price,
+            Currency = expense.Currency,
+            UserId = expense.UserId,
+            GroupName = expense.Group.GroupName,
+            UserName = expense.User.Name
+        };
+    }
 
 }

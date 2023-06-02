@@ -1,4 +1,6 @@
-﻿namespace salutaris.Contracts.Responses;
+﻿using salutaris.Models;
+
+namespace salutaris.Contracts.Responses;
 
 public class ExpenseResponse
 {
@@ -11,3 +13,9 @@ public class ExpenseResponse
     public required decimal Price { get; init; }
     public required string Currency { get; init; } = default!;
  }
+
+public class ExpenseResponseFull : ExpenseResponse
+{
+    public required string UserName { get; init; }
+    public string GroupName { get; set; }
+}

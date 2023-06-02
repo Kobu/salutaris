@@ -9,7 +9,7 @@ namespace salutaris.Endpoints.ExpenseEndpoints;
 
 [HttpGet("expense/user/{id:guid}")]
 [AllowAnonymous]
-public class GetExpensesByUserEndpoint : ResultEndpoint<GetUserRequest, List<ExpenseResponse>>
+public class GetExpensesByUserEndpoint : ResultEndpoint<GetUserRequest, List<ExpenseResponseFull>>
 {
 
     private readonly IExpenseService _expenseService;
@@ -28,7 +28,7 @@ public class GetExpensesByUserEndpoint : ResultEndpoint<GetUserRequest, List<Exp
         }
 
         var response = result.Data
-            .Select(expense => expense.ToResponse())
+            .Select(expense => expense.ToResponseFull())
             .ToList();
         
         return await HandleOk(response);
