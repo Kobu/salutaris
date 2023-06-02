@@ -1,0 +1,334 @@
+{
+	"info": {
+		"_postman_id": "ff3cedff-116c-4e01-8dbd-3ff4cde7ecf9",
+		"name": "salutaris",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Groups",
+			"item": [
+				{
+					"name": "Create Group as Non-Existing User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"CreatorId\": \"{{$guid}}\",\r\n    \"Name\": \"My Group\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5112/group/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"group",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Group as Existing User Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"CreatorId\": \"395b0597-f0bd-435b-8445-b271d89cd8ac\",\r\n    \"Name\": \"My Group\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5112/group/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"group",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Existing Group By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/group/f6c38b99-b7e1-4464-bc91-167bf7a004db",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"group",
+								"f6c38b99-b7e1-4464-bc91-167bf7a004db"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Non-Existing Group By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/group/f6c38b99-b7e1-4464-bc91-167bf7a004db",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"group",
+								"f6c38b99-b7e1-4464-bc91-167bf7a004db"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Groups",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/group/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"group",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users of Existing Group",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/group/f6c38b99-b7e1-4464-bc91-167bf7a004db/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"group",
+								"f6c38b99-b7e1-4464-bc91-167bf7a004db",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Join Existing Group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"e216031c-3fe4-4e73-b2dd-d13737d06b36\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5112/group/f6c38b99-b7e1-4464-bc91-167bf7a004db/join",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"group",
+								"f6c38b99-b7e1-4464-bc91-167bf7a004db",
+								"join"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{$guid}}\",\r\n    \"name\": \"Kobu2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5112/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get existing user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/user/93b50e6f-7e92-4b3e-b7d8-79eb5132c71a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"user",
+								"93b50e6f-7e92-4b3e-b7d8-79eb5132c71a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get non-existing user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/user/d1bf596e-2f99-411a-80af-58fc11a7c9f1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"user",
+								"d1bf596e-2f99-411a-80af-58fc11a7c9f1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Expense",
+			"item": [
+				{
+					"name": "Create Expense",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Expense by Id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Expense by Group",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Expense by User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/expense/group/f6c38b99-b7e1-4464-bc91-167bf7a004db",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"expense",
+								"group",
+								"f6c38b99-b7e1-4464-bc91-167bf7a004db"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Expenses by Group by User",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
