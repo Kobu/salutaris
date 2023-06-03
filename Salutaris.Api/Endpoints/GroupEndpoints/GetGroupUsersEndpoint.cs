@@ -33,7 +33,7 @@ public class GetGroupUsersEndpoint : ResultEndpoint<GetGroupByIdRequest, List<Us
 
         if (!userInGroup.Data)
         {
-            return await HandleErr("This user cannot view this group", 401);
+            return await HandleErr("This user cannot view this group", StatusCodes.Status401Unauthorized);
         }
 
         var result = await _groupService.GetGroupUsers(req.Id);

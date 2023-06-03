@@ -36,7 +36,7 @@ public class LoginEndpoint : ResultEndpoint<LoginRequest, AuthenticationResponse
 
         if (!isAuthenticated.Data)
         {
-            return await HandleErr("Invalid credentials", 401);
+            return await HandleErr("Invalid credentials", StatusCodes.Status401Unauthorized);
         }
         
         

@@ -27,7 +27,7 @@ public class GetExpenseByGroupByUser : ResultEndpoint<GetExpenseByGroupByUserReq
     {
         if (req.InvokingUser != req.UserId)
         {
-            return await HandleErr("Unauthorized access", 401);
+            return await HandleErr("Unauthorized access", StatusCodes.Status401Unauthorized);
         }
         var result = await _expenseService.GetExpensesByGroupsByUser(req.GroupId, req.UserId);
         if (result.IsErr)

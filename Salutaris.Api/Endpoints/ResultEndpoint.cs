@@ -23,7 +23,7 @@ public abstract class ResultEndpoint<TRequest,TResponse>: Endpoint<TRequest,With
         return true;
     }
 
-    protected async Task<bool> HandleErr<T>(Result<T> res, int statusCode = 404)
+    protected async Task<bool> HandleErr<T>(Result<T> res, int statusCode = StatusCodes.Status400BadRequest)
     {
         await SendAsync(new()
         {
@@ -34,7 +34,7 @@ public abstract class ResultEndpoint<TRequest,TResponse>: Endpoint<TRequest,With
         return false;
     }
     
-    protected async Task<bool> HandleErr(string message, int statusCode = 404)
+    protected async Task<bool> HandleErr(string message, int statusCode = StatusCodes.Status400BadRequest)
     {
         await SendAsync(new()
         {
