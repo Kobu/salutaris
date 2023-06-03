@@ -7,11 +7,15 @@ using salutaris.Services;
 
 namespace salutaris.Endpoints.UserEndpoints;
 
-[HttpPost("user")]
-[AllowAnonymous]
 public class CreateUserEndpoint : ResultEndpoint<CreateUserRequest, UserResponse>
 {
     private readonly IUserService _userService;
+
+    public override void Configure()
+    {
+        Post("user");
+        AllowAnonymous();
+    }
 
     public CreateUserEndpoint(IUserService userService)
     {

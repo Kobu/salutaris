@@ -1,5 +1,4 @@
 ﻿using FastEndpoints;
-using Microsoft.AspNetCore.Authorization;
 using salutaris.Contracts.Requests;
 using salutaris.Contracts.Responses;
 using salutaris.Mapping;
@@ -7,10 +6,13 @@ using salutaris.Services;
 
 namespace salutaris.Endpoints.UserEndpoints;
 
-[HttpGet("user/{id:guid}")]
-[AllowAnonymous]
 public class GetUserEndpoint : ResultEndpoint<GetUserRequest, UserResponse>
 {
+    public override void Configure()
+    {
+        Get("user/{id:guid}");
+    }
+    
     private readonly IUserService _userService;
 
     public GetUserEndpoint(IUserService userService)

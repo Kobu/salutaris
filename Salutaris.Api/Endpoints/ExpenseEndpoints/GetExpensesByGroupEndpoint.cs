@@ -7,13 +7,16 @@ using salutaris.Services;
 
 namespace salutaris.Endpoints.ExpenseEndpoints;
 
-[HttpGet("expense/group/{id:guid}")]
-[AllowAnonymous]
 public class GetExpensesByGroupEndpoint : ResultEndpoint<GetGroupByIdRequest, List<ExpenseResponse>>
 {
 
     private readonly IExpenseService _expenseService;
-
+    public override void Configure()
+    {
+        Claims("UserId"); // allow only signed-in users to view this
+        Get("expense/group/{id:guid}");
+    }
+    
     public GetExpensesByGroupEndpoint(IExpenseService expenseService)
     {
         _expenseService = expenseService;

@@ -8,14 +8,17 @@ using salutaris.Utils;
 
 namespace salutaris.Endpoints.ExpenseEndpoints;
 
-[HttpPost("expense")]
-[AllowAnonymous]
 public class CreateExpenseEndpoint : ResultEndpoint<CreateExpenseRequest, ExpenseResponse>
 {
     private readonly IExpenseService _expenseService;
     private readonly IUserService _userService;
     private readonly IGroupService _groupService;
-    
+
+    public override void Configure()
+    {
+        Post("expense");
+        Claims("UserId");
+    }
 
     public CreateExpenseEndpoint(IExpenseService expenseService, IUserService userService, IGroupService groupService)
     {

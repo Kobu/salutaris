@@ -7,8 +7,6 @@ using EmptyResponse = FastEndpoints.EmptyResponse;
 
 namespace salutaris.Endpoints.GroupEndpoints;
 
-[HttpPost("group/{id:guid}/join")]
-[AllowAnonymous]
 public class JoinGroupEndpoint : ResultEndpoint<JoinGroupRequest,EmptyResponse>
 {
     private readonly IGroupService _groupService;
@@ -18,6 +16,12 @@ public class JoinGroupEndpoint : ResultEndpoint<JoinGroupRequest,EmptyResponse>
     {
         _groupService = groupService;
         _userService = userService;
+    }
+    
+    public override void Configure()
+    {
+        Claims("UserId");
+        Post("group/{id:guid}/join");
     }
 
     protected override async Task<bool> HandleResult(JoinGroupRequest req)

@@ -7,12 +7,16 @@ using salutaris.Services;
 
 namespace salutaris.Endpoints.ExpenseEndpoints;
 
-[HttpGet("expense/group/{groupId:guid}/{userId:guid}")]
-[AllowAnonymous]
 public class GetExpenseByGroupByUser : ResultEndpoint<GetExpenseByGroupByUserRequest, List<ExpenseResponse>>
 {
 
     private readonly IExpenseService _expenseService;
+
+    public override void Configure()
+    {
+        Get("expense/group/{groupId:guid}/{userId:guid}");
+        Claims("UserId");
+    }
 
     public GetExpenseByGroupByUser(IExpenseService expenseService)
     {
@@ -21,6 +25,10 @@ public class GetExpenseByGroupByUser : ResultEndpoint<GetExpenseByGroupByUserReq
 
     protected override async Task<bool> HandleResult(GetExpenseByGroupByUserRequest req)
     {
+        if (req.InvokingUser != req.UserId)
+        {
+            return await HandleErr("Unauthorized access", 401);
+        }
         var result = await _expenseService.GetExpensesByGroupsByUser(req.GroupId, req.UserId);
         if (result.IsErr)
         {

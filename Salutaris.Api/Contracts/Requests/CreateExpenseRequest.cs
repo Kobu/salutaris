@@ -1,8 +1,11 @@
-﻿namespace salutaris.Contracts.Requests;
+﻿using FastEndpoints;
+
+namespace salutaris.Contracts.Requests;
 
 public class CreateExpenseRequest
 {
     public required Guid GroupId { get; init; } = default!;
+    [FromClaim]
     public required Guid UserId { get; init; } = default!;
     public required string Item { get; init; } = default!;
     public required decimal Price { get; init; } = default!;

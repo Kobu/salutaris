@@ -6,11 +6,16 @@ using salutaris.Services;
 
 namespace salutaris.Endpoints.UserEndpoints;
 
-[HttpGet("user")]
-[AllowAnonymous]
 public class GetAllUsersEndpoint : ResultEndpointWithoutRequest<GetAllUsersResponse>
 {
     private readonly IUserService _userService;
+
+    
+    public override void Configure()
+    {
+        Get("user");
+        AllowAnonymous();
+    }
 
     public GetAllUsersEndpoint(IUserService userService)
     {

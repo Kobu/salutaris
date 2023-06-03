@@ -8,13 +8,16 @@ using Group = salutaris.Models.Group;
 
 namespace salutaris.Endpoints.GroupEndpoints;
 
-[HttpPost("/group")]
-[AllowAnonymous]
 public class CreateGroupEndpoint : ResultEndpoint<CreateGroupRequest,GroupResponse>
 {
     private readonly IGroupService _groupService ;
     private readonly IUserService _userService;
-
+    public override void Configure()
+    {
+        Claims("UserId");
+        Post("group");
+    }
+    
     public CreateGroupEndpoint(IGroupService groupService, IUserService userService)
     {
         _groupService = groupService;

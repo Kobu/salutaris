@@ -7,11 +7,15 @@ using salutaris.Services;
 
 namespace salutaris.Endpoints.GroupEndpoints;
 
-[HttpGet("group/{id:guid}")]
-[AllowAnonymous]
 public class GetGroupEndpoint : ResultEndpoint<GetGroupByIdRequest,GroupResponse>
 {
     private readonly IGroupService _groupService;
+
+    public override void Configure()
+    {
+        Get("group/{id:guid}");
+        AllowAnonymous();
+    }
 
     public GetGroupEndpoint(IGroupService groupService)
     {

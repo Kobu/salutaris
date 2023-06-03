@@ -13,4 +13,6 @@ public interface IUserService
     public Task<Result<User>> CreateNewUser(User user);
 
     public Task<Result<IEnumerable<User>>> GetAllUsers();
+
+    public Task<Result<bool>> AuthenticateUser(Guid userId, string password);
 }

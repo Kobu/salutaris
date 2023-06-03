@@ -7,12 +7,15 @@ using salutaris.Services;
 
 namespace salutaris.Endpoints.ExpenseEndpoints;
 
-[HttpGet("expense/{id:guid}")]
-[AllowAnonymous]
 public class GetExpenseByIdEndpoint : ResultEndpoint<GetExpenseByIdRequest,ExpenseResponse>
 {
 
     private readonly IExpenseService _expenseService;
+    public override void Configure()
+    {
+        Get("expense/{id:guid}");
+        AllowAnonymous();
+    }
 
     public GetExpenseByIdEndpoint(IExpenseService expenseService)
     {
