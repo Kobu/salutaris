@@ -10,10 +10,32 @@ public class UserRepository
     public async Task<Result<User>> CreateUser(User user)
     {
         await using var db = new DatabaseContext();
-        await db.Users.AddAsync(user);
-        await db.SaveChangesAsync();
 
-        return Result<User>.Ok(user);
+        try
+        {
+            await db.Users.AddAsync(user);
+            await db.SaveChangesAsync();
+
+            return Result<User>.Ok(user);
+        }
+        catch (Exception e)
+        {
+            return Result<User>.Err(e);
+        }
+    }
+
+    public async Task<Result<User?>> GetUserByName(string username)
+    {
+        await using var db = new DatabaseContext();
+        try
+        {
+            var user = await db.Users.FirstOrDefaultAsync(u => u.Name == username);
+            return Result<User?>.Ok(user);
+        }
+        catch (Exception e)
+        {
+            return Result<User?>.Err(e);
+        }
     }
 
     public async Task<Result<User>> GetUserById(Guid id)
@@ -26,20 +48,6 @@ public class UserRepository
             {
                 return Result<User>.Err(new Exception($"User of id '{id}' was not found"));
             }
-            return Result<User>.Ok(user);
-        }
-        catch (Exception e)
-        {
-            return Result<User>.Err(e);
-        }
-    }
-
-    public async Task<Result<User>> GetUserByName(string name)
-    {
-        await using var db = new DatabaseContext();
-        try
-        {
-            var user = await db.Users.FirstAsync(x => x.Name == name);
             return Result<User>.Ok(user);
         }
         catch (Exception e)

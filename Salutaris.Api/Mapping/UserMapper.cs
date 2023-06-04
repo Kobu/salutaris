@@ -13,7 +13,8 @@ public static class UserMapper
             Id = Guid.NewGuid(),
             CreatedAt = DateTime.Now,
             UpdatedAt = DateTime.Now,
-            Name = request.Name
+            Name = request.Name,
+            Password = request.Password
         };
     }
 

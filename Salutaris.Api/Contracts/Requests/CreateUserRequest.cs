@@ -3,5 +3,5 @@
 public class CreateUserRequest
 {
     public string Name { get; init; } = default!;
-    public string Password { get; set; }
+    public required string Password { get; set; }
 }

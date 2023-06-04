@@ -13,14 +13,24 @@ public class UserService : IUserService
         return await _userRepository.GetUserById(id);
     }
 
-    public async Task<Result<User>> GetUserByName(string name)
+    public async Task<Result<User?>> GetUserByName(string name)
     {
         return await _userRepository.GetUserByName(name);
     }
 
     public async Task<Result<User>> CreateNewUser(User user)
     {
-        // TODO check if user with given name already exists
+        var userExists = await GetUserByName(user.Name);
+        if (userExists.IsErr)
+        {
+            return Result<User>.Err(userExists.Error);
+        }
+
+        if (userExists.Data is not null)
+        {
+            return Result<User>.Err($"User with name {user.Name} already exists");
+        }
+        
         return await _userRepository.CreateUser(user);
     }
 

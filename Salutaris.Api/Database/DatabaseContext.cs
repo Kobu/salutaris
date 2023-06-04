@@ -23,6 +23,9 @@ public class DatabaseContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.Name)
+            .IsUnique();
         
         modelBuilder.Entity<UserGroup>()
             .HasKey(ug => new { ug.UserId, ug.GroupId });
