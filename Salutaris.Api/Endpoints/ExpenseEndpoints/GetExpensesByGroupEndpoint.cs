@@ -7,7 +7,7 @@ using salutaris.Services;
 
 namespace salutaris.Endpoints.ExpenseEndpoints;
 
-public class GetExpensesByGroupEndpoint : ResultEndpoint<GetGroupByIdRequest, List<ExpenseResponse>>
+public class GetExpensesByGroupEndpoint : ResultEndpoint<GetGroupByIdRequest, List<ExpenseResponseFull>>
 {
 
     private readonly IExpenseService _expenseService;
@@ -31,7 +31,7 @@ public class GetExpensesByGroupEndpoint : ResultEndpoint<GetGroupByIdRequest, Li
         }
 
         var response = result.Data
-            .Select(expense => expense.ToResponse())
+            .Select(expense => expense.ToResponseFull())
             .ToList();
         
         return await HandleOk(response);

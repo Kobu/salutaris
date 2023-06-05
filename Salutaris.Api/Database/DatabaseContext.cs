@@ -56,7 +56,6 @@ public class DatabaseContext : DbContext
             .HasForeignKey(g => g.CreatorId);
     }
 
-
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
         options.EnableSensitiveDataLogging();
