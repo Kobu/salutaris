@@ -4,7 +4,6 @@ namespace salutaris.Contracts.Requests;
 
 public class GetExpenseByIdRequest
 {
-    public Guid Id { get; init; } = default!;
-    [FromClaim]
-    public string UserId { get; set; }
+    public required Guid Id { get; init; } = default;
+    [FromClaim] public string UserId { get; init; } = default!;
 }

@@ -4,8 +4,7 @@ namespace salutaris.Contracts.Requests;
 
 public class GetExpenseByGroupByUserRequest
 {
-    public Guid UserId { get; set; }
-    public Guid GroupId { get; set; }
-    [FromClaim("UserId")]
-    public Guid InvokingUser { get; set; }
+    public required Guid UserId { get; init; } = default;
+    public required Guid GroupId { get; init; } = default;
+    [FromClaim("UserId")] public  Guid InvokingUser { get; init; } = default;
 }

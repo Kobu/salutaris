@@ -4,7 +4,6 @@ namespace salutaris.Contracts.Requests;
 
 public class GetGroupByIdRequest
 {
-    public Guid Id { get; init; } = default;
-    [FromClaim] 
-    public Guid UserId { get; set; }
+    public required Guid Id { get; init; } = default;
+    [FromClaim] public Guid UserId { get; init; } = default;
 }

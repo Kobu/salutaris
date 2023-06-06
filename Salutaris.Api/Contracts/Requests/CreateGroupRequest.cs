@@ -4,7 +4,7 @@ namespace salutaris.Contracts.Requests;
 
 public class CreateGroupRequest
 {
-    public string Name { get; init; } = default!;
-    [FromClaim]
+    public required string Name { get; init; } = default!;
+    [FromClaim("UserId")]
     public Guid CreatorId { get; init; } = default!;
 }

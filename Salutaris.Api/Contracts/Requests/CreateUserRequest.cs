@@ -2,6 +2,6 @@
 
 public class CreateUserRequest
 {
-    public string Name { get; init; } = default!;
-    public required string Password { get; set; }
+    public required string Name { get; init; } = default!;
+    public required string Password { get; init; } = default!;
 }
