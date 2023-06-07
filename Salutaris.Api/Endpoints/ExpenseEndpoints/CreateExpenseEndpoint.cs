@@ -1,5 +1,4 @@
-﻿using FastEndpoints;
-using Microsoft.AspNetCore.Authorization;
+﻿
 using salutaris.Contracts.Requests;
 using salutaris.Contracts.Responses;
 using salutaris.Mapping;
@@ -16,8 +15,8 @@ public class CreateExpenseEndpoint : ResultEndpoint<CreateExpenseRequest, Expens
 
     public override void Configure()
     {
-        Post("expense");
         Claims("UserId");
+        Post("expense");
     }
 
     public CreateExpenseEndpoint(IExpenseService expenseService, IUserService userService, IGroupService groupService)
