@@ -2,6 +2,6 @@ namespace salutaris.Contracts.Responses;
 
 public class AuthenticationResponse
 {
-    public Guid UserId { get; set; }
-    public string Token { get; set; }
+    public required Guid UserId { get; set; }
+    public required string Token { get; set; }
 }

@@ -2,5 +2,5 @@
 
 public class GetAllUsersResponse
 {
-    public IEnumerable<UserResponse> Users { get; init; } = Enumerable.Empty<UserResponse>();
+    public required IEnumerable<UserResponse> Users { get; init; } 
 }

@@ -22,7 +22,7 @@ public static class UserMapper
     {
         return new UserResponse
         {
-            id = user.Id,
+            Id = user.Id,
             Name = user.Name,
             CreatedAt = user.CreatedAt,
             UpdatedAt = user.UpdatedAt
@@ -35,7 +35,7 @@ public static class UserMapper
         {
             Users = users.Select(user => new UserResponse
             {
-                id = user.Id,
+                Id = user.Id,
                 Name = user.Name,
                 CreatedAt = user.CreatedAt,
                 UpdatedAt = user.UpdatedAt

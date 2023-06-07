@@ -10,7 +10,7 @@ public static class GroupMapper
     {
         return new()
         {
-            id = group.Id,
+            Id = group.Id,
             GroupName = group.GroupName,
             CreatedAt = group.CreatedAt,
             UpdatedAt = group.UpdatedAt,

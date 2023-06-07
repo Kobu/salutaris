@@ -2,10 +2,8 @@
 
 public class UserResponse
 {
-    public Guid id { get; init; }
-    public string Name { get; init; } = default!;
-
-    public DateTime CreatedAt { get; init; } = default!;
-
-    public DateTime UpdatedAt { get; init; } = default!;
+    public required Guid Id { get; init; }
+    public required string Name { get; init; }
+    public required DateTime CreatedAt { get; init; }
+    public required DateTime UpdatedAt { get; init; }
 }

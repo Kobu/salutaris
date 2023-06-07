@@ -2,7 +2,7 @@
 
 public class WithError<T>
 {
-    public required bool Success { get; init; } = default;
-    public T? Data { get; init; } = default!;
-    public string? ErrorMessage { get; init; } = default;
+    public required bool Success { get; init; } 
+    public T? Data { get; init; }
+    public string? ErrorMessage { get; init; }
 }
