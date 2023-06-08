@@ -2,11 +2,11 @@
 
 public class User : BaseModel
 {
-    public string Name { get; init; } = default!;
+    public required string Name { get; init; }
 
-    public ICollection<UserGroup> UserGroups { get; set; }
+    public List<UserGroup> UserGroups { get; init; } = new();
 
-    public List<Expense> Expenses { get; set; } = new();
+    public List<Expense> Expenses { get; init; } = new();
 
-    public string Password { get; init; } = default!;
+    public required string Password { get; init; } = default!;
 }
