@@ -1,4 +1,5 @@
-﻿using salutaris.Contracts.Responses;
+﻿using salutaris.Contracts.Requests;
+using salutaris.Contracts.Responses;
 using salutaris.Models;
 
 namespace salutaris.Mapping;
@@ -15,6 +16,19 @@ public static class GroupMapper
             CreatedAt = group.CreatedAt,
             UpdatedAt = group.UpdatedAt,
             CreatorId = group.CreatorId,
+        };
+    }
+
+    public static Group ToGroup(this CreateGroupRequest req, User groupCreator)
+    {
+        return new()
+        {
+            Id = Guid.NewGuid(),
+            CreatedAt = DateTime.Now,
+            UpdatedAt = DateTime.Now,
+            Creator = groupCreator,
+            CreatorId = groupCreator.Id,
+            GroupName = req.Name
         };
     }
 }

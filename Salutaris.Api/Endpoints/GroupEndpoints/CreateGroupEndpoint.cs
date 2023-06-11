@@ -26,23 +26,13 @@ public class CreateGroupEndpoint : ResultEndpoint<CreateGroupRequest,GroupRespon
 
     protected override async Task<bool> HandleResult(CreateGroupRequest req)
     {
-        // TODO this should be moved to the service layer
         var userExists = await _userService.GetUserById(req.CreatorId);
         if (userExists.IsErr)
         {
             return await HandleErr(userExists);
         }
 
-        // TODO use mapper
-        var group = new Group
-        {
-            Id = Guid.NewGuid(),
-            CreatedAt = DateTime.Now,
-            UpdatedAt = DateTime.Now,
-            Creator = userExists.Data,
-            GroupName = req.Name
-        };
-
+        var group = req.ToGroup(userExists.Data);
         var result = await _groupService.CreateGroup(group);
         if (result.IsErr)
         {
