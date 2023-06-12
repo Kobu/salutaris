@@ -1,11 +1,8 @@
-using System.IdentityModel.Tokens.Jwt;
-using FastEndpoints;
 using FastEndpoints.Security;
 using Microsoft.AspNetCore.Authorization;
 using salutaris.Contracts.Requests;
 using salutaris.Contracts.Responses;
 using salutaris.Services;
-using salutaris.Utils;
 
 namespace salutaris.Endpoints.UserEndpoints;
 
