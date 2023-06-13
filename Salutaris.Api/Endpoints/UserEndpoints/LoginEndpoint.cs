@@ -1,5 +1,4 @@
 using FastEndpoints.Security;
-using Microsoft.AspNetCore.Authorization;
 using salutaris.Contracts.Requests;
 using salutaris.Contracts.Responses;
 using salutaris.Services;
@@ -15,12 +14,10 @@ public class LoginEndpoint : ResultEndpoint<LoginRequest, AuthenticationResponse
     }
 
     private readonly IUserService _userService;
-    private readonly IAuthorizationService _authorizationService;
 
-    public LoginEndpoint(IUserService userService, IAuthorizationService authorizationService)
+    public LoginEndpoint(IUserService userService)
     {
         _userService = userService;
-        _authorizationService = authorizationService;
     }
 
     protected override async Task<bool> HandleResult(LoginRequest req)
