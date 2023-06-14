@@ -24,7 +24,7 @@ public class UserRepository
         }
     }
 
-    public async Task<Result<User?>> GetUserByName(string username)
+    public async Task<Result<User?>> GetUserByUsername(string username)
     {
         await using var db = new DatabaseContext();
         try

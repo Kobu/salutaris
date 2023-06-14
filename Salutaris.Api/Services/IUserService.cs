@@ -14,5 +14,6 @@ public interface IUserService
 
     public Task<Result<IEnumerable<User>>> GetAllUsers();
 
-    public Task<Result<bool>> AuthenticateUser(Guid userId, string password);
+    public Task<Result<User>> AuthenticateUserByUsername(string username, string password);
+    public Task<Result<User>> AuthenticateUserById(Guid userId, string password);
 }

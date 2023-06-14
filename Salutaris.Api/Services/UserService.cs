@@ -15,7 +15,7 @@ public class UserService : IUserService
 
     public async Task<Result<User?>> GetUserByName(string name)
     {
-        return await _userRepository.GetUserByName(name);
+        return await _userRepository.GetUserByUsername(name);
     }
 
     public async Task<Result<User>> CreateNewUser(User user)
@@ -39,14 +39,35 @@ public class UserService : IUserService
         return await _userRepository.GetAllUsers();
     }
 
-    public async Task<Result<bool>> AuthenticateUser(Guid userId, string password)
+    public async Task<Result<User>> AuthenticateUserByUsername(string username, string password)
+    {
+        var user = await _userRepository.GetUserByUsername(username);
+        if (user.IsErr)
+        {
+            return Result<User>.Err(user.Error);
+        }
+
+        if ( user.Data is null||user.Data.Password != password )
+        {
+            return Result<User>.Err("Invalid credentials");
+        }
+
+        return Result<User>.Ok(user.Data);
+    }    
+
+    public async Task<Result<User>> AuthenticateUserById(Guid userId, string password)
     {
         var user = await _userRepository.GetUserById(userId);
         if (user.IsErr)
         {
-            return Result<bool>.Err(user.Error);
+            return Result<User>.Err(user.Error);
         }
 
-        return Result<bool>.Ok(user.Data.Password == password);
+        if (user.Data.Password != password)
+        {
+            return Result<User>.Err("Invalid credentials");
+        }
+
+        return Result<User>.Ok(user.Data);
     }
 }

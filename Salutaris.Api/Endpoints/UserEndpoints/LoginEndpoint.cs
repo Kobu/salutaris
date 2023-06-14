@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using FastEndpoints.Security;
 using salutaris.Contracts.Requests;
 using salutaris.Contracts.Responses;
@@ -22,30 +23,26 @@ public class LoginEndpoint : ResultEndpoint<LoginRequest, AuthenticationResponse
 
     protected override async Task<bool> HandleResult(LoginRequest req)
     {
-        var isAuthenticated = await _userService.AuthenticateUser(req.UserId, req.Password);
-        if (isAuthenticated.IsErr)
+        var user = await _userService.AuthenticateUserByUsername(req.Username, req.Password);
+        if (user.IsErr)
         {
-            return await HandleErr(isAuthenticated);
+            return await HandleErr(user);
         }
 
-        if (!isAuthenticated.Data)
-        {
-            return await HandleErr("Invalid credentials", StatusCodes.Status401Unauthorized);
-        }
-        
-        
         var jwtToken = JWTBearer.CreateToken(
             signingKey: "TokenSigningKeyw",
             expireAt: DateTime.UtcNow.AddDays(1),
             priviledges: u =>
             {
-                u.Claims.Add(new("UserId", req.UserId.ToString()));
+                u.Claims.Add(new Claim("UserId", user.Data.Id.ToString()));
+                u.Claims.Add(new Claim("Username", user.Data.Name));
             });
         
         return await HandleOk(new AuthenticationResponse
         {
-            UserId = req.UserId,
-            Token = jwtToken
+            UserId = user.Data.Id,
+            Token = jwtToken,
+            Username = user.Data.Name
         });
     }
 }
