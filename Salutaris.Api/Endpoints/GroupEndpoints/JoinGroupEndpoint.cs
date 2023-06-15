@@ -1,13 +1,14 @@
-﻿using FastEndpoints;
-using Microsoft.AspNetCore.Authorization;
+﻿#region
+
+using FastEndpoints;
 using salutaris.Contracts.Requests;
-using salutaris.Contracts.Responses;
 using salutaris.Services;
-using EmptyResponse = FastEndpoints.EmptyResponse;
+
+#endregion
 
 namespace salutaris.Endpoints.GroupEndpoints;
 
-public class JoinGroupEndpoint : ResultEndpoint<JoinGroupRequest,EmptyResponse>
+public class JoinGroupEndpoint : ResultEndpoint<JoinGroupRequest, EmptyResponse>
 {
     private readonly IGroupService _groupService;
     private readonly IUserService _userService;
@@ -17,7 +18,7 @@ public class JoinGroupEndpoint : ResultEndpoint<JoinGroupRequest,EmptyResponse>
         _groupService = groupService;
         _userService = userService;
     }
-    
+
     public override void Configure()
     {
         Claims("UserId");
@@ -45,6 +46,6 @@ public class JoinGroupEndpoint : ResultEndpoint<JoinGroupRequest,EmptyResponse>
             return await HandleErr(result);
         }
 
-        return await HandleOk(new());
+        return await HandleOk(new EmptyResponse());
     }
 }

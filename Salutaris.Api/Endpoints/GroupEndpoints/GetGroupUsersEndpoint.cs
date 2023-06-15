@@ -1,25 +1,27 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using FastEndpoints;
-using Microsoft.AspNetCore.Authorization;
+﻿#region
+
 using salutaris.Contracts.Requests;
 using salutaris.Contracts.Responses;
 using salutaris.Mapping;
 using salutaris.Services;
+
+#endregion
 
 namespace salutaris.Endpoints.GroupEndpoints;
 
 public class GetGroupUsersEndpoint : ResultEndpoint<GetGroupByIdRequest, List<UserResponse>>
 {
     private readonly IGroupService _groupService;
+
+    public GetGroupUsersEndpoint(IGroupService groupService)
+    {
+        _groupService = groupService;
+    }
+
     public override void Configure()
     {
         Claims("UserId");
         Get("group/{id:guid}/users");
-    }
-    
-    public GetGroupUsersEndpoint(IGroupService groupService)
-    {
-        _groupService = groupService;
     }
 
 

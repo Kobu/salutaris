@@ -2,5 +2,5 @@
 
 public class GetAllUsersResponse
 {
-    public required IEnumerable<UserResponse> Users { get; init; } 
+    public required IEnumerable<UserResponse> Users { get; init; }
 }

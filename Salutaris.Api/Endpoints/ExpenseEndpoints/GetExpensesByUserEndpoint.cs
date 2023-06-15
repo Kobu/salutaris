@@ -1,25 +1,27 @@
-﻿using FastEndpoints;
-using Microsoft.AspNetCore.Authorization;
+﻿#region
+
 using salutaris.Contracts.Requests;
 using salutaris.Contracts.Responses;
 using salutaris.Mapping;
 using salutaris.Services;
 
+#endregion
+
 namespace salutaris.Endpoints.ExpenseEndpoints;
 
 public class GetExpensesByUserEndpoint : ResultEndpoint<GetUserRequest, List<ExpenseResponseFull>>
 {
-
     private readonly IExpenseService _expenseService;
-    public override void Configure()
-    {
-        Claims("UserId"); // allow only signed-in users to view this
-        Get("expense/user/{id:guid}");
-    }
 
     public GetExpensesByUserEndpoint(IExpenseService expenseService)
     {
         _expenseService = expenseService;
+    }
+
+    public override void Configure()
+    {
+        Claims("UserId"); // allow only signed-in users to view this
+        Get("expense/user/{id:guid}");
     }
 
     protected override async Task<bool> HandleResult(GetUserRequest req)
@@ -33,7 +35,7 @@ public class GetExpensesByUserEndpoint : ResultEndpoint<GetUserRequest, List<Exp
         var response = result.Data
             .Select(expense => expense.ToResponseFull())
             .ToList();
-        
+
         return await HandleOk(response);
     }
 }

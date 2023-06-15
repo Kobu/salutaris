@@ -1,27 +1,29 @@
-﻿using FastEndpoints;
-using Microsoft.AspNetCore.Authorization;
+﻿#region
+
 using salutaris.Contracts.Requests;
 using salutaris.Contracts.Responses;
 using salutaris.Mapping;
 using salutaris.Services;
-using Group = salutaris.Models.Group;
+
+#endregion
 
 namespace salutaris.Endpoints.GroupEndpoints;
 
-public class CreateGroupEndpoint : ResultEndpoint<CreateGroupRequest,GroupResponse>
+public class CreateGroupEndpoint : ResultEndpoint<CreateGroupRequest, GroupResponse>
 {
-    private readonly IGroupService _groupService ;
+    private readonly IGroupService _groupService;
     private readonly IUserService _userService;
-    public override void Configure()
-    {
-        Claims("UserId");
-        Post("group");
-    }
-    
+
     public CreateGroupEndpoint(IGroupService groupService, IUserService userService)
     {
         _groupService = groupService;
         _userService = userService;
+    }
+
+    public override void Configure()
+    {
+        Claims("UserId");
+        Post("group");
     }
 
     protected override async Task<bool> HandleResult(CreateGroupRequest req)

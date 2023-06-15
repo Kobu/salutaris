@@ -1,24 +1,26 @@
+#region
+
 using salutaris.Contracts.Requests;
 using salutaris.Contracts.Responses;
 using salutaris.Mapping;
 using salutaris.Services;
 
+#endregion
+
 namespace salutaris.Endpoints.UserEndpoints;
-
-
 
 public class GetLoggedInUserEndpoint : ResultEndpoint<GetLoggedInUserRequest, UserResponse>
 {
-    public override void Configure()
-    {
-        Get("user/me");
-    }
-    
     private readonly IUserService _userService;
 
     public GetLoggedInUserEndpoint(IUserService userService)
     {
         _userService = userService;
+    }
+
+    public override void Configure()
+    {
+        Get("user/me");
     }
 
     protected override async Task<bool> HandleResult(GetLoggedInUserRequest req)

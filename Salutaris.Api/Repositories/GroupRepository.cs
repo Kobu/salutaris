@@ -1,7 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#region
+
+using Microsoft.EntityFrameworkCore;
 using salutaris.Database;
 using salutaris.Models;
 using salutaris.Utils;
+
+#endregion
 
 namespace salutaris.Repositories;
 
@@ -38,14 +42,14 @@ public class GroupRepository
         try
         {
             db.Groups.Attach(group);
-            var userGroup = new UserGroup()
+            var userGroup = new UserGroup
             {
                 UserId = user.Id,
                 User = user,
                 GroupId = group.Id,
                 Group = group
             };
-            
+
             group.UserGroups.Add(userGroup);
             await db.SaveChangesAsync();
             return Result<User>.Ok(user);
@@ -73,7 +77,7 @@ public class GroupRepository
                 .Include(x => x.User)
                 .Select(x => x.User)
                 .ToList();
-            
+
             return Result<List<User>>.Ok(userGroups);
         }
         catch (Exception e)
@@ -94,6 +98,7 @@ public class GroupRepository
             {
                 return Result<User>.Err("Group was not found");
             }
+
             return Result<User>.Ok(group.Creator);
         }
         catch (Exception e)

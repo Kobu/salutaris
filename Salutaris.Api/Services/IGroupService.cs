@@ -1,5 +1,9 @@
-﻿using salutaris.Models;
+﻿#region
+
+using salutaris.Models;
 using salutaris.Utils;
+
+#endregion
 
 namespace salutaris.Services;
 
@@ -11,7 +15,7 @@ public interface IGroupService
     public Task<Result<User>> JoinGroup(Group group, User user);
     public Task<Result<Group>> GetGroupById(Guid groupId);
     public Task<Result<List<Group>>> GetAllGroups();
-    public  Task<Result<List<User>>> GetGroupUsers(Guid groupId);
-    public  Task<Result<Group>> GetGroupFullInfo(Guid groupId);
+    public Task<Result<List<User>>> GetGroupUsers(Guid groupId);
+    public Task<Result<Group>> GetGroupFullInfo(Guid groupId);
     public Task<Result<bool>> UserBelongsToGroup(Guid groupId, Guid userId);
 }

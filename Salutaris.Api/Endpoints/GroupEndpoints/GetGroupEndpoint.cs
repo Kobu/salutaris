@@ -1,25 +1,27 @@
-﻿using FastEndpoints;
-using Microsoft.AspNetCore.Authorization;
+﻿#region
+
 using salutaris.Contracts.Requests;
 using salutaris.Contracts.Responses;
 using salutaris.Mapping;
 using salutaris.Services;
 
+#endregion
+
 namespace salutaris.Endpoints.GroupEndpoints;
 
-public class GetGroupEndpoint : ResultEndpoint<GetGroupByIdRequest,GroupResponse>
+public class GetGroupEndpoint : ResultEndpoint<GetGroupByIdRequest, GroupResponse>
 {
     private readonly IGroupService _groupService;
+
+    public GetGroupEndpoint(IGroupService groupService)
+    {
+        _groupService = groupService;
+    }
 
     public override void Configure()
     {
         Get("group/{id:guid}");
         AllowAnonymous();
-    }
-
-    public GetGroupEndpoint(IGroupService groupService)
-    {
-        _groupService = groupService;
     }
 
     protected override async Task<bool> HandleResult(GetGroupByIdRequest req)

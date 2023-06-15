@@ -1,9 +1,11 @@
-﻿using FastEndpoints;
-using Microsoft.AspNetCore.Authorization;
+﻿#region
+
 using salutaris.Contracts.Requests;
 using salutaris.Contracts.Responses;
 using salutaris.Mapping;
 using salutaris.Services;
+
+#endregion
 
 namespace salutaris.Endpoints.UserEndpoints;
 
@@ -11,15 +13,15 @@ public class CreateUserEndpoint : ResultEndpoint<CreateUserRequest, UserResponse
 {
     private readonly IUserService _userService;
 
+    public CreateUserEndpoint(IUserService userService)
+    {
+        _userService = userService;
+    }
+
     public override void Configure()
     {
         Post("user");
         AllowAnonymous();
-    }
-
-    public CreateUserEndpoint(IUserService userService)
-    {
-        _userService = userService;
     }
 
     protected override async Task<bool> HandleResult(CreateUserRequest req)

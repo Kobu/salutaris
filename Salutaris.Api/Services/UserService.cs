@@ -1,6 +1,10 @@
-﻿using salutaris.Models;
+﻿#region
+
+using salutaris.Models;
 using salutaris.Repositories;
 using salutaris.Utils;
+
+#endregion
 
 namespace salutaris.Services;
 
@@ -30,7 +34,7 @@ public class UserService : IUserService
         {
             return Result<User>.Err($"User with name {user.Name} already exists");
         }
-        
+
         return await _userRepository.CreateUser(user);
     }
 
@@ -47,13 +51,13 @@ public class UserService : IUserService
             return Result<User>.Err(user.Error);
         }
 
-        if ( user.Data is null||user.Data.Password != password )
+        if (user.Data is null || user.Data.Password != password)
         {
             return Result<User>.Err("Invalid credentials");
         }
 
         return Result<User>.Ok(user.Data);
-    }    
+    }
 
     public async Task<Result<User>> AuthenticateUserById(Guid userId, string password)
     {

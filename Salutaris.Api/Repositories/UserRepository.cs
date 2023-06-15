@@ -1,7 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#region
+
+using Microsoft.EntityFrameworkCore;
 using salutaris.Database;
 using salutaris.Models;
 using salutaris.Utils;
+
+#endregion
 
 namespace salutaris.Repositories;
 
@@ -48,6 +52,7 @@ public class UserRepository
             {
                 return Result<User>.Err(new Exception($"User of id '{id}' was not found"));
             }
+
             return Result<User>.Ok(user);
         }
         catch (Exception e)

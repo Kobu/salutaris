@@ -30,7 +30,7 @@ public class Result<T>
             Error = e
         };
     }
-    
+
     public static Result<T> Err(string message)
     {
         return new Result<T>(false)

@@ -1,6 +1,10 @@
-﻿using salutaris.Contracts.Requests;
+﻿#region
+
+using salutaris.Contracts.Requests;
 using salutaris.Contracts.Responses;
 using salutaris.Models;
+
+#endregion
 
 namespace salutaris.Mapping;
 
@@ -8,7 +12,7 @@ public static class ExpenseMapper
 {
     public static Expense ToExpense(this CreateExpenseRequest request, Group group, User user)
     {
-        return new()
+        return new Expense
         {
             Item = request.Item,
             Price = request.Price,
@@ -22,7 +26,7 @@ public static class ExpenseMapper
 
     public static ExpenseResponse ToResponse(this Expense expense)
     {
-        return new()
+        return new ExpenseResponse
         {
             Id = expense.Id,
             CreatedAt = expense.CreatedAt,
@@ -34,10 +38,10 @@ public static class ExpenseMapper
             UserId = expense.UserId
         };
     }
-    
+
     public static ExpenseResponseFull ToResponseFull(this Expense expense)
     {
-        return new()
+        return new ExpenseResponseFull
         {
             Id = expense.Id,
             CreatedAt = expense.CreatedAt,
@@ -51,5 +55,4 @@ public static class ExpenseMapper
             UserName = expense.User.Name
         };
     }
-
 }

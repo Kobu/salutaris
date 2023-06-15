@@ -1,9 +1,10 @@
-﻿using FastEndpoints;
-using Microsoft.AspNetCore.Authorization;
-using salutaris.Contracts.Requests;
+﻿#region
+
 using salutaris.Contracts.Responses;
 using salutaris.Mapping;
 using salutaris.Services;
+
+#endregion
 
 namespace salutaris.Endpoints.GroupEndpoints;
 
@@ -11,15 +12,15 @@ public class GetAllGroupsEndpoint : ResultEndpointWithoutRequest<List<GroupRespo
 {
     private readonly IGroupService _groupService;
 
+    public GetAllGroupsEndpoint(IGroupService groupService)
+    {
+        _groupService = groupService;
+    }
+
     public override void Configure()
     {
         Get("group");
         AllowAnonymous();
-    }
-    
-    public GetAllGroupsEndpoint(IGroupService groupService)
-    {
-        _groupService = groupService;
     }
 
     protected override async Task<bool> HandleResult()

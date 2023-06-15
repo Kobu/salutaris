@@ -1,5 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#region
+
+using Microsoft.EntityFrameworkCore;
 using salutaris.Models;
+
+#endregion
 
 namespace salutaris.Database;
 
@@ -26,7 +30,7 @@ public class DatabaseContext : DbContext
         modelBuilder.Entity<User>()
             .HasIndex(u => u.Name)
             .IsUnique();
-        
+
         modelBuilder.Entity<UserGroup>()
             .HasKey(ug => new { ug.UserId, ug.GroupId });
 

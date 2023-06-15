@@ -1,8 +1,10 @@
-﻿using FastEndpoints;
-using Microsoft.AspNetCore.Authorization;
+﻿#region
+
 using salutaris.Contracts.Responses;
 using salutaris.Mapping;
 using salutaris.Services;
+
+#endregion
 
 namespace salutaris.Endpoints.UserEndpoints;
 
@@ -10,16 +12,16 @@ public class GetAllUsersEndpoint : ResultEndpointWithoutRequest<GetAllUsersRespo
 {
     private readonly IUserService _userService;
 
-    
+    public GetAllUsersEndpoint(IUserService userService)
+    {
+        _userService = userService;
+    }
+
+
     public override void Configure()
     {
         Get("user");
         AllowAnonymous();
-    }
-
-    public GetAllUsersEndpoint(IUserService userService)
-    {
-        _userService = userService;
     }
 
     protected override async Task<bool> HandleResult()
@@ -33,5 +35,4 @@ public class GetAllUsersEndpoint : ResultEndpointWithoutRequest<GetAllUsersRespo
         var userResponse = result.Data.ToUserResponse();
         return await HandleOk(userResponse);
     }
-
 }

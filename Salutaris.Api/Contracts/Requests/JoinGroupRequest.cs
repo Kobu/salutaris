@@ -1,4 +1,8 @@
-﻿using FastEndpoints;
+﻿#region
+
+using FastEndpoints;
+
+#endregion
 
 namespace salutaris.Contracts.Requests;
 

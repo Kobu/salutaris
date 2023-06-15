@@ -1,23 +1,20 @@
-﻿
+﻿#region
+
 using salutaris.Contracts.Requests;
 using salutaris.Contracts.Responses;
 using salutaris.Mapping;
 using salutaris.Services;
 using salutaris.Utils;
 
+#endregion
+
 namespace salutaris.Endpoints.ExpenseEndpoints;
 
 public class CreateExpenseEndpoint : ResultEndpoint<CreateExpenseRequest, ExpenseResponse>
 {
     private readonly IExpenseService _expenseService;
-    private readonly IUserService _userService;
     private readonly IGroupService _groupService;
-
-    public override void Configure()
-    {
-        Claims("UserId");
-        Post("expense");
-    }
+    private readonly IUserService _userService;
 
     public CreateExpenseEndpoint(IExpenseService expenseService, IUserService userService, IGroupService groupService)
     {
@@ -25,6 +22,13 @@ public class CreateExpenseEndpoint : ResultEndpoint<CreateExpenseRequest, Expens
         _userService = userService;
         _groupService = groupService;
     }
+
+    public override void Configure()
+    {
+        Claims("UserId");
+        Post("expense");
+    }
+
     protected override async Task<bool> HandleResult(CreateExpenseRequest req)
     {
         var group = await _groupService.GetGroupById(req.GroupId);
@@ -46,7 +50,7 @@ public class CreateExpenseEndpoint : ResultEndpoint<CreateExpenseRequest, Expens
         }
 
         var expense = req.ToExpense(group.Data, user.Data);
-        
+
         var result = await _expenseService.CreateExpense(expense);
         if (result.IsErr)
         {

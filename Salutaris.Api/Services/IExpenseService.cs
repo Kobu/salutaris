@@ -1,5 +1,9 @@
-﻿using salutaris.Models;
+﻿#region
+
+using salutaris.Models;
 using salutaris.Utils;
+
+#endregion
 
 namespace salutaris.Services;
 
@@ -10,5 +14,4 @@ public interface IExpenseService
     public Task<Result<List<Expense>>> GetExpensesByGroup(Guid groupId);
     public Task<Result<List<Expense>>> GetExpensesByUser(Guid userId);
     public Task<Result<List<Expense>>> GetExpensesByGroupsByUser(Guid groupId, Guid userId);
-
 }

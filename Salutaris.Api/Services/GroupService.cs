@@ -1,7 +1,10 @@
-﻿using System.Collections.Immutable;
+﻿#region
+
 using salutaris.Models;
 using salutaris.Repositories;
 using salutaris.Utils;
+
+#endregion
 
 namespace salutaris.Services;
 
@@ -37,7 +40,7 @@ public class GroupService : IGroupService
 
         var userInGroup = groupUsers.Data
             .FirstOrDefault(groupUser => groupUser.Id == user.Id);
-        
+
         if (userInGroup is not null)
             return Result<User>.Err("User is already in the group");
 

@@ -7,4 +7,4 @@ public class GroupResponse
     public required DateTime CreatedAt { get; init; }
     public required DateTime UpdatedAt { get; init; }
     public required Guid CreatorId { get; init; }
-} 
+}

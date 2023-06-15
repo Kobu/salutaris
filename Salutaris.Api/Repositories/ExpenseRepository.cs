@@ -1,8 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#region
+
+using Microsoft.EntityFrameworkCore;
 using salutaris.Database;
 using salutaris.Models;
-using salutaris.Services;
 using salutaris.Utils;
+
+#endregion
 
 namespace salutaris.Repositories;
 
@@ -20,10 +23,10 @@ public class ExpenseRepository
             await db.SaveChangesAsync();
 
             var result = await db.Expenses
-                .Include(x=>x.Group)
-                .Include(x=> x.User)
+                .Include(x => x.Group)
+                .Include(x => x.User)
                 .FirstAsync(x => x.Id == expense.Id);
-        
+
             return Result<Expense>.Ok(result);
         }
         catch (Exception e)
@@ -36,8 +39,8 @@ public class ExpenseRepository
     {
         await using var db = new DatabaseContext();
         var result = await db.Expenses
-            .Include(x=>x.Group)
-            .Include(x=> x.User)
+            .Include(x => x.Group)
+            .Include(x => x.User)
             .FirstOrDefaultAsync(expense => expense.Id == id);
 
         if (result is null)
