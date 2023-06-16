@@ -32,7 +32,7 @@ public class UserService : IUserService
 
         if (userExists.Data is not null)
         {
-            return Result<User>.Err($"User with name {user.Name} already exists");
+            return Result<User>.Err($"User with name '{user.Name}' already exists");
         }
 
         return await _userRepository.CreateUser(user);
