@@ -7,24 +7,24 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="EntityFramework" Version="6.4.4"/>
-        <PackageReference Include="FastEndpoints" Version="5.10.0.3-beta"/>
-        <PackageReference Include="FastEndpoints.Security" Version="5.10.0.3-beta"/>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5"/>
+        <PackageReference Include="EntityFramework" Version="6.4.4" />
+        <PackageReference Include="FastEndpoints" Version="5.10.0.3-beta" />
+        <PackageReference Include="FastEndpoints.Security" Version="5.10.0.3-beta" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0-preview.3.23174.2">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0-preview.3.23174.2"/>
-        <PackageReference Include="Microsoft.OpenApi" Version="1.6.4"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0-preview.3.23174.2" />
+        <PackageReference Include="Microsoft.OpenApi" Version="1.6.4" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
     </ItemGroup>
 
 
     <ItemGroup>
-        <None Remove="Properties\launchSettings.json"/>
+        <None Remove="Properties\launchSettings.json" />
     </ItemGroup>
 
 </Project>
