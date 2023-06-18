@@ -1,6 +1,9 @@
-﻿namespace salutaris.Contracts.Requests;
+﻿using FastEndpoints;
+
+namespace salutaris.Contracts.Requests;
 
 public class GetUserRequest
 {
-    public required Guid Id { get; init; }
+    [BindFrom("username")]
+    public required string Username { get; init; }
 }

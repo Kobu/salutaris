@@ -20,15 +20,20 @@ public class GetUserEndpoint : ResultEndpoint<GetUserRequest, UserResponse>
 
     public override void Configure()
     {
-        Get("user/{id:guid}");
+        Get("user/{username}");
     }
 
     protected override async Task<bool> HandleResult(GetUserRequest req)
     {
-        var result = await _userService.GetUserById(req.Id);
+        var result = await _userService.GetUserByName(req.Username);
         if (result.IsErr)
         {
             return await HandleErr(result);
+        }
+
+        if (result.Data is null)
+        {
+            return await HandleErr($"User of name {req.Username} not found");
         }
 
         var userResponse = result.Data.ToUserResponse();

@@ -70,7 +70,7 @@ public class ExpenseRepository
         }
     }
 
-    public async Task<Result<List<Expense>>> GetExpensesByUser(Guid userId)
+    public async Task<Result<List<Expense>>> GetExpensesByUser(string username)
     {
         try
         {
@@ -78,7 +78,7 @@ public class ExpenseRepository
             var result = db.Expenses
                 .Include(x => x.Group)
                 .Include(x => x.User)
-                .Where(expense => expense.UserId == userId)
+                .Where(expense => expense.User.Name == username)
                 .ToList();
 
             return Result<List<Expense>>.Ok(result);

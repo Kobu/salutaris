@@ -21,12 +21,12 @@ public class GetExpensesByUserEndpoint : ResultEndpoint<GetUserRequest, List<Exp
     public override void Configure()
     {
         Claims("UserId"); // allow only signed-in users to view this
-        Get("expense/user/{id:guid}");
+        Get("expense/user/{username}");
     }
 
     protected override async Task<bool> HandleResult(GetUserRequest req)
     {
-        var result = await _expenseService.GetExpensesByUser(req.Id);
+        var result = await _expenseService.GetExpensesByUser(req.Username);
         if (result.IsErr)
         {
             return await HandleErr(result);
