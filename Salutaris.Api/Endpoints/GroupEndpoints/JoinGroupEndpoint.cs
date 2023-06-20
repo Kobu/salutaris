@@ -21,19 +21,23 @@ public class JoinGroupEndpoint : ResultEndpoint<JoinGroupRequest, EmptyResponse>
 
     public override void Configure()
     {
-        Claims("UserId");
+        Claims("Username");
         Post("group/{id:guid}/join");
     }
 
     protected override async Task<bool> HandleResult(JoinGroupRequest req)
     {
-        var user = await _userService.GetUserById(req.UserId);
+        var user = await _userService.GetUserByName(req.Username);
         if (user.IsErr)
         {
             return await HandleErr(user);
         }
+        
+        if (user.Data is null)
+        {
+            return await HandleErr($"User of username '{req.Username}' does not exists");
+        }
 
-        // TODO move this to the service layer
         var group = await _groupService.GetGroupById(req.GroupId);
         if (group.IsErr)
         {
