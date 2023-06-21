@@ -21,7 +21,7 @@ public class GetExpenseByIdEndpoint : ResultEndpoint<GetExpenseByIdRequest, Expe
     public override void Configure()
     {
         Get("expense/{id:guid}");
-        AllowAnonymous();
+        Claims("Username");
     }
 
     protected override async Task<bool> HandleResult(GetExpenseByIdRequest req)
