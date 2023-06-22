@@ -17,8 +17,6 @@ public class ExpenseRepository
         {
             await using var db = new DatabaseContext();
 
-            db.Attach(expense.Group);
-            db.Attach(expense.User);
             await db.Expenses.AddAsync(expense);
             await db.SaveChangesAsync();
 

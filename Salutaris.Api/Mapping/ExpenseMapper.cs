@@ -18,9 +18,7 @@ public static class ExpenseMapper
             Price = request.Price,
             Currency = request.Currency,
             UserId = user.Id,
-            User = user,
             GroupId = group.Id,
-            Group = group
         };
     }
 

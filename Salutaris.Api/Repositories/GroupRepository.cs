@@ -42,6 +42,7 @@ public class GroupRepository
         try
         {
             db.Groups.Attach(group);
+            db.Users.Attach(user);
             var userGroup = new UserGroup
             {
                 UserId = user.Id,
