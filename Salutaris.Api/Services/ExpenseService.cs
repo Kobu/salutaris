@@ -32,7 +32,7 @@ public class ExpenseService : IExpenseService
         return await _expenseRepository.GetExpensesByUser(username);
     }
 
-    public async Task<Result<List<Expense>>> GetExpensesByGroupsByUser(Guid groupId, Guid userId)
+    public async Task<Result<List<Expense>>> GetExpensesByGroupsByUser(Guid groupId, string username)
     {
         var byGroup = await GetExpensesByGroup(groupId);
         if (byGroup.IsErr)
@@ -41,7 +41,7 @@ public class ExpenseService : IExpenseService
         }
 
         var result = byGroup.Data
-            .Where(expense => expense.UserId == userId)
+            .Where(expense => expense.User.Name == username)
             .ToList();
         return Result<List<Expense>>.Ok(result);
     }

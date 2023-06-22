@@ -8,7 +8,10 @@ namespace salutaris.Contracts.Requests;
 
 public class GetExpenseByGroupByUserRequest
 {
-    public required Guid UserId { get; init; }
+    [BindFrom("username")]
+    public required string Username { get; init; }
+    [BindFrom("groupId")]
     public required Guid GroupId { get; init; }
-    [FromClaim("UserId")] public Guid InvokingUser { get; init; } = default;
+    // allow only members of the group to view the groups users data
+    [FromClaim("Username")] public string InvokingUser { get; init; } = default!;
 }

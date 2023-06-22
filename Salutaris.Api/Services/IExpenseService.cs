@@ -13,5 +13,5 @@ public interface IExpenseService
     public Task<Result<Expense>> GetExpenseById(Guid id);
     public Task<Result<List<Expense>>> GetExpensesByGroup(Guid groupId);
     public Task<Result<List<Expense>>> GetExpensesByUser(string username);
-    public Task<Result<List<Expense>>> GetExpensesByGroupsByUser(Guid groupId, Guid userId);
+    public Task<Result<List<Expense>>> GetExpensesByGroupsByUser(Guid groupId, string username);
 }
