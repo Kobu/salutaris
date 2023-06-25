@@ -1,0 +1,571 @@
+{
+	"info": {
+		"_postman_id": "4cfd03be-5360-46d4-95b4-bc88ea64f4c9",
+		"name": "salutaris",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27430941"
+	},
+	"item": [
+		{
+			"name": "Groups",
+			"item": [
+				{
+					"name": "Create Group as Existing User Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI5NDg1YzA2OS0xOGUxLTQ3ZGQtOTZmMy0wMWVlY2I3NjEyMmYiLCJuYmYiOjE2ODQxNjM1MTUsImV4cCI6MTY4NDI0OTkxNSwiaWF0IjoxNjg0MTYzNTE1fQ.-uyhhNXMsuTj7vn42qoDsPFRt7JCMFCDvrVDERRIciA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\": \"Friday football\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5112/group/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"group",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Existing Group By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI1OTkwNmRiMy05NTQ1LTRkMTItODA1Yi02MzA0MDZkMDkwMDIiLCJVc2VybmFtZSI6IktvYnUiLCJuYmYiOjE2ODQxNzcxNzAsImV4cCI6MTY4NDI2MzU3MCwiaWF0IjoxNjg0MTc3MTcwfQ.JShIqBBO4ikx-Z8XXmC0wDZmiFkzPQxz_ZziuPSstv4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/group/{{GROUP1}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"group",
+								"{{GROUP1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Groups",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5112/group/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"group",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users of Existing Group",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI1OTkwNmRiMy05NTQ1LTRkMTItODA1Yi02MzA0MDZkMDkwMDIiLCJVc2VybmFtZSI6IktvYnUiLCJuYmYiOjE2ODQxNzcxNzAsImV4cCI6MTY4NDI2MzU3MCwiaWF0IjoxNjg0MTc3MTcwfQ.JShIqBBO4ikx-Z8XXmC0wDZmiFkzPQxz_ZziuPSstv4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/group/{{GROUP3}}/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"group",
+								"{{GROUP3}}",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Join Existing Group",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI1OTkwNmRiMy05NTQ1LTRkMTItODA1Yi02MzA0MDZkMDkwMDIiLCJVc2VybmFtZSI6IktvYnUiLCJuYmYiOjE2ODQxNzcxNzAsImV4cCI6MTY4NDI2MzU3MCwiaWF0IjoxNjg0MTc3MTcwfQ.JShIqBBO4ikx-Z8XXmC0wDZmiFkzPQxz_ZziuPSstv4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5112/group/{{GROUP1}}/join",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"group",
+								"{{GROUP1}}",
+								"join"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get all users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5112/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Kobus2\",\r\n    \"password\": \"pas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5112/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get existing user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI1OTkwNmRiMy05NTQ1LTRkMTItODA1Yi02MzA0MDZkMDkwMDIiLCJVc2VybmFtZSI6IktvYnUiLCJuYmYiOjE2ODQxNzcxNzAsImV4cCI6MTY4NDI2MzU3MCwiaWF0IjoxNjg0MTc3MTcwfQ.JShIqBBO4ikx-Z8XXmC0wDZmiFkzPQxz_ZziuPSstv4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/user/Kobu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"user",
+								"Kobu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current Signed in User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI1OTkwNmRiMy05NTQ1LTRkMTItODA1Yi02MzA0MDZkMDkwMDIiLCJVc2VybmFtZSI6IktvYnUiLCJuYmYiOjE2ODQxNzcxNzAsImV4cCI6MTY4NDI2MzU3MCwiaWF0IjoxNjg0MTc3MTcwfQ.JShIqBBO4ikx-Z8XXmC0wDZmiFkzPQxz_ZziuPSstv4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/user/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"user",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get non-existing user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI1OTkwNmRiMy05NTQ1LTRkMTItODA1Yi02MzA0MDZkMDkwMDIiLCJVc2VybmFtZSI6IktvYnUiLCJuYmYiOjE2ODQxNzcxNzAsImV4cCI6MTY4NDI2MzU3MCwiaWF0IjoxNjg0MTc3MTcwfQ.JShIqBBO4ikx-Z8XXmC0wDZmiFkzPQxz_ZziuPSstv4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/user/NOPE",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"user",
+								"NOPE"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authorize User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI5NDg1YzA2OS0xOGUxLTQ3ZGQtOTZmMy0wMWVlY2I3NjEyMmYiLCJuYmYiOjE2ODQwNjk2NjUsImV4cCI6MTY4NDE1NjA2NSwiaWF0IjoxNjg0MDY5NjY1fQ.hGcFsG87Cjgrfz1JPnDqzpsdINoFpLvJStMxM1QpvYg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Kobu\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5112/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Expense",
+			"item": [
+				{
+					"name": "Create Expense",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI1OTkwNmRiMy05NTQ1LTRkMTItODA1Yi02MzA0MDZkMDkwMDIiLCJVc2VybmFtZSI6IktvYnUiLCJuYmYiOjE2ODQxNzcxNzAsImV4cCI6MTY4NDI2MzU3MCwiaWF0IjoxNjg0MTc3MTcwfQ.JShIqBBO4ikx-Z8XXmC0wDZmiFkzPQxz_ZziuPSstv4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"groupId\" :  \"{{GROUP2}}\",\r\n    \"item\" : \"chocolate coco\",\r\n    \"price\" : \"30\",\r\n    \"currency\" : \"EUR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5112/expense",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"expense"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Expense by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/expense/c1bd38ba-8bb4-48ba-b652-a2c60c4e022e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"expense",
+								"c1bd38ba-8bb4-48ba-b652-a2c60c4e022e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Expense by Group",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI1OTkwNmRiMy05NTQ1LTRkMTItODA1Yi02MzA0MDZkMDkwMDIiLCJVc2VybmFtZSI6IktvYnUiLCJuYmYiOjE2ODQxNzcxNzAsImV4cCI6MTY4NDI2MzU3MCwiaWF0IjoxNjg0MTc3MTcwfQ.JShIqBBO4ikx-Z8XXmC0wDZmiFkzPQxz_ZziuPSstv4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/expense/group/{{GROUP1}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"expense",
+								"group",
+								"{{GROUP1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Expense by User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI1OTkwNmRiMy05NTQ1LTRkMTItODA1Yi02MzA0MDZkMDkwMDIiLCJVc2VybmFtZSI6IktvYnUiLCJuYmYiOjE2ODQxNzcxNzAsImV4cCI6MTY4NDI2MzU3MCwiaWF0IjoxNjg0MTc3MTcwfQ.JShIqBBO4ikx-Z8XXmC0wDZmiFkzPQxz_ZziuPSstv4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/expense/user/Kobu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"expense",
+								"user",
+								"Kobu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Expenses by Group by User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI1OTkwNmRiMy05NTQ1LTRkMTItODA1Yi02MzA0MDZkMDkwMDIiLCJVc2VybmFtZSI6IktvYnUiLCJuYmYiOjE2ODQxNzcxNzAsImV4cCI6MTY4NDI2MzU3MCwiaWF0IjoxNjg0MTc3MTcwfQ.JShIqBBO4ikx-Z8XXmC0wDZmiFkzPQxz_ZziuPSstv4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5112/expense/group/{{GROUP3}}/Kobu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5112",
+							"path": [
+								"expense",
+								"group",
+								"{{GROUP3}}",
+								"Kobu"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "GROUP1",
+			"value": "9dc1d2a5-6ef7-4119-8b99-671a6955d1e9"
+		},
+		{
+			"key": "GROUP2",
+			"value": "9bdc8835-9217-498f-9e61-dfba5e8ead84"
+		},
+		{
+			"key": "GROUP3",
+			"value": "7f296a7b-740a-477b-a57c-5fb83b2e30cf"
+		}
+	]
+}
