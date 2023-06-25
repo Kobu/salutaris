@@ -24,4 +24,5 @@ app.UseCors(x => x
 );
 app.UseAuthentication();
 app.UseAuthorization();
+// new Seeding().SeedData(); TODO UNCOMMENT THE LINE FOR SEEDING
 app.Run();
