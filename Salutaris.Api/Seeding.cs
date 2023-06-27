@@ -94,12 +94,17 @@ public class Seeding
     private async Task SeedExpenses()
     {
         var random = new Random();
-        var items = new[] { "socks", "soap", "plastic bags", "BMW X6", "toothpaste", "milk", "eggs" };
+        var items = new[]
+        {
+            "socks", "soap", "plastic bags", "BMW X6", "toothpaste", "milk", "eggs", "greps", "toilet paper", "paper",
+            "whiskey", "child"
+        };
 
 
         var group1users = (await GroupService.GetGroupUsers(Group1.Id)).Data;
-        for (var i = 0; i < 10;  i++)
+        for (var i = 0; i < group1users.Count * 5; i++)
         {
+            var randomDate = DateTime.Now.AddDays(random.Next(10));
             var user1 = group1users[random.Next(group1users.Count)];
             await ExpenseService.CreateExpense(new Expense
             {
@@ -109,12 +114,15 @@ public class Seeding
                 Currency = "EUR",
                 UserId = user1.Id,
                 GroupId = Group1.Id,
+                CreatedAt = randomDate,
+                UpdatedAt = randomDate
             });
         }
 
         var group2users = (await GroupService.GetGroupUsers(Group2.Id)).Data;
-        for (var i = 0; i < 10; i++)
+        for (var i = 0; i < group2users.Count * 5; i++)
         {
+            var randomDate = DateTime.Now.AddDays(random.Next(10));
             var user2 = group2users[random.Next(group2users.Count)];
             await ExpenseService.CreateExpense(new Expense
             {
@@ -123,26 +131,28 @@ public class Seeding
                 Price = random.Next(3, 400),
                 Currency = "EUR",
                 UserId = user2.Id,
-                User = user2,
                 GroupId = Group2.Id,
-                Group = Group2
+                CreatedAt = randomDate,
+                UpdatedAt = randomDate
             });
         }
 
         var group3users = (await GroupService.GetGroupUsers(Group3.Id)).Data;
-        for (var i = 0; i < 10; i++)
+        for (var i = 0; i < group3users.Count * 5; i++)
         {
             var user3 = group3users[random.Next(group3users.Count)];
+            var randomDate = DateTime.Now.AddDays(random.Next(10));
             await ExpenseService.CreateExpense(new Expense
+
             {
                 Id = Guid.NewGuid(),
                 Item = items[random.Next(items.Length)],
                 Price = random.Next(3, 400),
                 Currency = "EUR",
                 UserId = user3.Id,
-                User = user3,
                 GroupId = Group3.Id,
-                Group = Group3
+                CreatedAt = randomDate,
+                UpdatedAt = randomDate
             });
         }
     }
@@ -157,5 +167,51 @@ public class Seeding
         await GroupService.JoinGroup(Group2, User2);
 
         await GroupService.JoinGroup(Group1, User3);
+
+        var user1 = new User
+        {
+            Name = "Mike Tyson",
+            Password = "spinal"
+        };
+        await UserService.CreateNewUser(user1);
+        await GroupService.JoinGroup(Group1, user1);
+        var user = new User
+        {
+            Name = "Elon Musk",
+            Password = "spacex"
+        };
+        await UserService.CreateNewUser(user);
+        await GroupService.JoinGroup(Group1, user);
+        var user2 = new User()
+        {
+            Name = "Leonardo Dicaprio",
+            Password = "oscar"
+        };
+        await UserService.CreateNewUser(user2);
+        await GroupService.JoinGroup(Group1, user2);
+
+
+        var user3 = new User()
+        {
+            Name = "Benes",
+            Password = "algo"
+        };
+        await UserService.CreateNewUser(user3);
+        await GroupService.JoinGroup(Group2, user3);
+        var user4 = new User ()
+        {
+            Name = "Bartek",
+            Password = "meh"
+        };
+        await UserService.CreateNewUser(user4);
+        await GroupService.JoinGroup(Group2, user4);
+
+        var user5 = new User ()
+        {
+            Name = "Test-user",
+            Password = "password"
+        };
+        await UserService.CreateNewUser(user5);
+        await GroupService.JoinGroup(Group3, user5);
     }
 }

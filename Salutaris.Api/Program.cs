@@ -2,6 +2,7 @@
 
 using FastEndpoints;
 using FastEndpoints.Security;
+using salutaris;
 using salutaris.Services;
 
 #endregion
@@ -24,5 +25,5 @@ app.UseCors(x => x
 );
 app.UseAuthentication();
 app.UseAuthorization();
-// new Seeding().SeedData(); TODO UNCOMMENT THE LINE FOR SEEDING
+// new Seeding().SeedData(); //TODO UNCOMMENT THE LINE FOR SEEDING
 app.Run();
