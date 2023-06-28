@@ -2,6 +2,7 @@
 
 using FastEndpoints;
 using FastEndpoints.Security;
+using FastEndpoints.Swagger;
 using salutaris;
 using salutaris.Services;
 
@@ -11,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddFastEndpoints();
 builder.Services.AddCors();
 builder.Services.AddJWTBearerAuth("TokenSigningKeyw");
-
+builder.Services.SwaggerDocument(); //define a swagger document
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IGroupService, GroupService>();
 builder.Services.AddSingleton<IExpenseService, ExpenseService>();
@@ -25,5 +26,6 @@ app.UseCors(x => x
 );
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSwaggerGen(); //add this
 // new Seeding().SeedData(); //TODO UNCOMMENT THE LINE FOR SEEDING
 app.Run();
